@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register finish</title>
+  </head>
+  <body>
+      <form action="finishRegistration.php" method="post">
+      <div class="title"><span>Finish registration</span></div> 
+              <input type="text" id="name" name="name" placeholder="Name:" required> <br><br>
+              <input type="text" id="surname" name="surname" placeholder="Surname:" required> <br><br>
+              <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" required> <br><br>
+              <input type="submit" value="Create Account" id="createAccount" name = "createAccount">
+        </form>
+  </body>
+</html>
