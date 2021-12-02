@@ -11,8 +11,18 @@
       <div class="title"><span>Make an account</span></div> 
               <input type="email" id="emailRegister" name="emailRegister" placeholder="Email Address:" required> <br><br>
               <input type="password" id="pwdRegister" name="pwdRegister" placeholder="Password:" required> <br><br>
+              <input type="text" id="name" name="name" placeholder="Name:" required> <br><br>
+              <input type="text" id="surname" name="surname" placeholder="Surname:" required> <br><br>
+              <input type="text" id="phone" name="phone" placeholder="phone number" required> <br><br>
               <input type="submit" value="Create Account" id="createAccount" name = "createAccount">
         </form>
-        <a href="/public_html/finishRegistration.html">Next step</a>
+
+        <form action="login.php" method="post">
+          <div class="title"><span>Login</span></div> 
+                  <input type="email" id="email" name="email" placeholder="Email Address:" required> <br><br>
+                  <input type="password" id="pwd" name="pwd" placeholder="Password:" required> <br><br>
+                  <input type="submit" value="Login" id="login" name = "login">
+            </form>
+      
   </body>
 </html>

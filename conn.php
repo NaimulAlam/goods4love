@@ -2,9 +2,9 @@
 
     try{
         $host = "localhost";
-        $dbname = "id17967575_g4l";
-        $user = "id17967575_admin";
-        $pwd = "f##/e[Od{n44YPax";
+        $dbname = "g4l";
+        $user = "root";
+        $pwd = "";
 
         $conn = new PDO("mysql:host=$host;dbname=$dbname",$user,$pwd);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -6,13 +6,18 @@
     $password = $_POST['pwd'];
 
 }
-$check = $conn->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
-$result = $check->execute([$email,$password]);
+$check = $conn->prepare('SELECT * FROM users WHERE email = :emailLogin AND password = :pwdLogin');
+$check->execute([
+    ':emailLogin' => $email,
+    ':pwdLogin' => $password
+]);
 
-if($result){
+if($check->fetch()){
     session_start();
+    $_SESSION['loggedin'] = true;
     $_SESSION["email"] = $email;
-    header("location: main.html");
+
+    header("location: main.php");
 }
 else{
     header("location: index.html");
