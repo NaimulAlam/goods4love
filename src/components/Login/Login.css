@@ -1,4 +1,14 @@
 .loginForm {
   margin: auto;
-  width: 50%;
+  width: 40%;
+  background-color: rgb(163, 236, 212);
+}
+
+@media (max-width: 768px) {
+  .loginForm {
+    width: 80%;
+  }
+  .createAccountText {
+    font-size: 13px;
+  }
 }

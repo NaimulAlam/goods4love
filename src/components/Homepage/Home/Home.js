@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from '../../Login/Login';
+import RegistrationForm from '../../RegistrationForm/RegistrationForm';
 import Header from '../Header/Header';
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
     <div>
       <Header />
       <Login />
+      <RegistrationForm />
     </div>
   );
 };

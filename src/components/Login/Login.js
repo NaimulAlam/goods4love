@@ -3,8 +3,8 @@ import './Login.css';
 
 const Login = () => {
   return (
-    <div className="container-fluid">
-      <form className="loginForm my-4">
+    <div id="SignIn" className="container-fluid">
+      <form className="loginForm my-4 px-3 py-2">
         <div className="card-header text-center">
           <h2>Login</h2>
         </div>
@@ -29,9 +29,20 @@ const Login = () => {
             Check me out
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div className="container px-2 py-lg-3">
+          <div className="row gx-2">
+            <div className="col ">
+              <a className="btn btn-outline-primary createAccountText" href="#SignUp">
+                create an account
+              </a>
+            </div>
+            <div className="col text-end">
+              <button type="submit" className="btn btn-primary">
+                Sign In
+              </button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );

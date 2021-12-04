@@ -3,7 +3,7 @@ import React from 'react';
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg py-3 navbar-light bg-light">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -37,7 +37,7 @@ const Navbar = () => {
                 </a>
               </li>
             </ul>
-            <a className="btn btn-outline-warning me-lg-5" href="#SignUp">
+            <a className="btn btn-outline-warning me-lg-5" href="#SignIn">
               Sign In
             </a>
           </div>

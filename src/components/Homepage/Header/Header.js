@@ -8,7 +8,9 @@ import './Header.css';
 const Header = () => {
   return (
     <div>
+      {/* This is Navbar */}
       <Navbar />
+      {/* This is carousel */}
       <div>
         <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-indicators">
@@ -23,26 +25,38 @@ const Header = () => {
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2" />
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3" />
           </div>
-          <div className="carousel-inner  bg-info">
+          <div className="carousel-inner  ">
             <div className="carousel-item active ">
               <img src={loveInHands} className="d-block carouselImage" alt="Love in Hand" />
-              <div className="carousel-caption d-none d-md-block text-dark ">
-                <h2>Donate</h2>
-                <p>Some representative placeholder content for the first slide.</p>
+              <div className="carousel-caption d-md-block">
+                <a className="btn btn-danger btn-lg mx-2 my-2" role="button">
+                  Donate Now
+                </a>
+                <a className="btn btn-outline-info btn-lg mx-2 my-2" role="button">
+                  read more
+                </a>
               </div>
             </div>
             <div className="carousel-item">
               <img src={volunteersNeeded} className="d-block carouselImage" alt="volunteer needed" />
-              <div className="carousel-caption d-none d-md-block ">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
+              <div className="carousel-caption d-md-block">
+                <a className="btn btn-danger btn-lg mx-2 my-2" role="button">
+                  Donate Now
+                </a>
+                <a className="btn btn-outline-info btn-lg mx-2 my-2" role="button">
+                  read more
+                </a>
               </div>
             </div>
             <div className="carousel-item">
               <img src={clothDonate} className="d-block carouselImage" alt="volunteer" />
-              <div className="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+              <div className="carousel-caption d-md-block">
+                <a className="btn btn-danger btn-lg mx-2 my-2" role="button">
+                  Donate Now
+                </a>
+                <a className="btn btn-outline-info btn-lg mx-2 my-2" role="button">
+                  read more
+                </a>
               </div>
             </div>
           </div>
