@@ -1,0 +1,12 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+.home-page-welcome {
+  position: relative;
+  padding: 96px 0;
+  background: #f9f9f9;
+  background-size: cover;
+  z-index: 99;
+}

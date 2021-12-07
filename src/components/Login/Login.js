@@ -4,6 +4,7 @@ import './Login.css';
 const Login = () => {
   return (
     <div id="SignIn" className="container-fluid">
+      <h2 className="text-center py-3">This Login will be in singe page</h2>
       <form className="loginForm my-4 px-3 py-2">
         <div className="card-header text-center">
           <h2>Login</h2>

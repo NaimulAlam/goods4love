@@ -12,6 +12,7 @@
         "endOfLine": "auto"
       }
     ],
-    "arrow-body-style": ["error", "always"]
+    "arrow-body-style": ["error", "always"],
+    "react/prop-types": 0
   }
 }

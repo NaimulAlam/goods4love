@@ -24,6 +24,7 @@ const RegistrationForm = () => {
 
   return (
     <div id="SignUp" className="container my-3 px-lg-5">
+      <h3 className="text-center py-3">This Registration also will be on a single page</h3>
       <form className="row g-3 needs-validation mx-md-5 px-md-5" noValidate>
         <div className="col-12 position-relative">
           <label htmlFor="validationTooltip01" className="form-label">
