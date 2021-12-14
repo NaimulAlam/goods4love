@@ -4,7 +4,7 @@ import loveInHands from '../../../Assests/loveOnHands.jpg';
 
 const Wellcome = () => {
   return (
-    <div>
+    <div id="AboutUs">
       <div className="home-page-welcome">
         <div className="container">
           <div className="row">

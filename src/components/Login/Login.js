@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
@@ -33,9 +34,9 @@ const Login = () => {
         <div className="container px-2 py-lg-3">
           <div className="row gx-2">
             <div className="col ">
-              <a className="btn btn-outline-primary createAccountText" href="#SignUp">
+              <Link className="btn btn-outline-primary createAccountText" to="/registration">
                 create an account
-              </a>
+              </Link>
             </div>
             <div className="col text-end">
               <button type="submit" className="btn btn-primary">
