@@ -1,5 +1,7 @@
-body {
-  margin-top: 20px;
+.serviceDiv {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  padding: 20px;
 }
 
 .card-big-shadow {

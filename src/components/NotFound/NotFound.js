@@ -6,10 +6,13 @@ const NotFound = () => {
   return (
     <div className="container-fluid text-center">
       <Navbar />
-      <h1>URL Or Page Not Found</h1>
-      <Link className="btn btn-info me-lg-5" to="/">
-        Go Back to Home
-      </Link>
+      <h2 style={{ color: 'red' }}> Sorry!</h2>
+      <h2>URL Or Page Not Found</h2>
+      <p>
+        <Link className="btn btn-info" to="/">
+          Go Back
+        </Link>
+      </p>
     </div>
   );
 };

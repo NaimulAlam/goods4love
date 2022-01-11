@@ -3,7 +3,7 @@ import './Services.css';
 
 const Offers = () => {
   return (
-    <div className="container bootstrap snippets bootdeys">
+    <div className="container serviceDiv  ">
       <div className="row">
         <div className="col-md-4 col-sm-6 content-card">
           <div className="card-big-shadow">

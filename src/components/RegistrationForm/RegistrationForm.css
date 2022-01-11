@@ -1,0 +1,7 @@
+.formDiv {
+  margin: 0 200px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 4px solid #ccc;
+  border-radius: 10px;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../../Shared/Navbar/Navbar';
-import loveInHands from '../../../Assests/loveOnHands.jpg';
-import volunteersNeeded from '../../../Assests/volunteersNeeded.png';
+import donateEuro from '../../../Assests/donateEuro.jpg';
+import RWHeart from '../../../Assests/RWHeart.png';
 import clothDonate from '../../../Assests/clothDonation.jpg';
 import './Header.css';
 
@@ -27,23 +27,23 @@ const Header = () => {
           </div>
           <div className="carousel-inner  ">
             <div className="carousel-item active ">
-              <img src={loveInHands} className="d-block carouselImage" alt="Love in Hand" />
+              <img src={donateEuro} className="d-block carouselImage" alt="Love in Hand" />
               <div className="carousel-caption d-md-block">
-                <a className="btn btn-danger btn-lg mx-2 my-2" role="button">
+                <a className="btn btn-danger btn-md mx-2 my-2" role="button">
                   Donate Now
                 </a>
-                <a className="btn btn-outline-info btn-lg mx-2 my-2" role="button">
+                <a className="btn btn-outline-info btn-md mx-2 my-2" role="button">
                   read more
                 </a>
               </div>
             </div>
             <div className="carousel-item">
-              <img src={volunteersNeeded} className="d-block carouselImage" alt="volunteer needed" />
+              <img src={RWHeart} className="d-block carouselImage" alt="volunteer needed" />
               <div className="carousel-caption d-md-block">
-                <a className="btn btn-danger btn-lg mx-2 my-2" role="button">
+                <a className="btn btn-danger btn-md mx-2 my-2" role="button">
                   Donate Now
                 </a>
-                <a className="btn btn-outline-info btn-lg mx-2 my-2" role="button">
+                <a className="btn btn-outline-info btn-md mx-2 my-2" role="button">
                   read more
                 </a>
               </div>
@@ -51,10 +51,10 @@ const Header = () => {
             <div className="carousel-item">
               <img src={clothDonate} className="d-block carouselImage" alt="volunteer" />
               <div className="carousel-caption d-md-block">
-                <a className="btn btn-danger btn-lg mx-2 my-2" role="button">
+                <a className="btn btn-danger btn-md mx-2 my-2" role="button">
                   Donate Now
                 </a>
-                <a className="btn btn-outline-info btn-lg mx-2 my-2" role="button">
+                <a className="btn btn-outline-info btn-md mx-2 my-2" role="button">
                   read more
                 </a>
               </div>
