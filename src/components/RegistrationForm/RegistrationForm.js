@@ -39,7 +39,7 @@ const RegistrationForm = () => {
   } = useForm(formOptions);
 
   const onSubmit = (submit) => {
-    fetch('http://localhost:5000/user/signup', {
+    fetch('https://goods4love.herokuapp.com/user/signup', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(submit),
