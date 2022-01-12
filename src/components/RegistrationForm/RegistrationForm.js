@@ -38,11 +38,27 @@ const RegistrationForm = () => {
     formState: { errors },
   } = useForm(formOptions);
 
-  function onSubmit(data) {
+  const onSubmit = (submit) => {
+    fetch('http://localhost:5000/user/signup', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(submit),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data) {
+          reset();
+          alert('Sign Up Successfull!');
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
     // display form data on success
-    alert(`SUCCESS!! :-)\n\n${JSON.stringify(data, null, 4)}`);
-    return console.log(data);
-  }
+    // alert(`SUCCESS!! :-)\n\n${JSON.stringify(data, null, 4)}`);
+  };
   console.log(errors);
 
   return (
@@ -123,12 +139,13 @@ const RegistrationForm = () => {
           </div>
           <div className="col-12 position-relative">
             <input
-              className="form-control"
+              className={`form-control ${errors.zipCode ? 'is-invalid' : ''}`}
               type="number"
               name="zipCode"
               placeholder="Zip Code"
               {...register('zipCode')}
             />
+            <div className="invalid-feedback">Enter the Zip Code</div>
           </div>
           <div className="col-12 position-relative">
             <input
@@ -151,7 +168,7 @@ const RegistrationForm = () => {
               className="btn btn-danger float-end"
               type="button"
               onClick={() => {
-                return reset();
+                reset();
               }}
             >
               Reset
