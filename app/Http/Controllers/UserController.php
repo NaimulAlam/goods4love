@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class UserController extends Controller
 {
@@ -33,6 +37,20 @@ class UserController extends Controller
         {
             return ["error"=>"Email or password do not match"];
         }
-       return $user;
+        $getId = User::where('email', $user->email)->value('ID');
+        $isAdmin=Admin::where('u_id', $getId)->first();
+        if($isAdmin)
+        {
+            //return response()->json(['admin' => true, 'user' => $user]);
+            return response()->json(['admin' => true, 'ID' => $user->ID, 'email' => $user->email, 'name' => $user->name, 'surname' => $user->surname, 'phone' => $user->phone]);
+        }
+        else{
+            //return response()->json(['admin' => false, 'user' => $user]);
+            return response()->json(['admin' => false, 'ID' => $user->ID, 'email' => $user->email, 'name' => $user->name, 'surname' => $user->surname, 'phone' => $user->phone]);
+        }
     }
+
+    
+
+    
 }
