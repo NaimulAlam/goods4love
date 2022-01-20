@@ -75,27 +75,6 @@ app.post('/api/login', async (req, res) => {
 //         const database = client.db(process.env.DB_NAME);
 //         const usersCollection = database.collection('users');
 //         // perform actions on the collection object
-//         app.post('/api/register', async (req, res) => {
-//             const user = req.body;
-//             console.log(user);
-//             const result = await usersCollection.insertOne(user);
-//             res.json(result);
-//         });
-
-//         app.get('/users', async (req, res) => {
-//             const cursor = usersCollection.find({});
-//             const users = await cursor.toArray();
-//             res.json(users);
-//         });
-
-//         app.get('/user/login', async (req, res) => {
-//             const { email } = req.query;
-//             const { password } = req.query;
-//             const query = { email, password };
-//             const cursor = usersCollection.find(query);
-//             const users = await cursor.toArray();
-//             res.json(users);
-//         });
 
 //         app.get('/users/:id', async (req, res) => {
 //             const { id } = req.params;
