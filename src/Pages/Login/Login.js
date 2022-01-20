@@ -28,7 +28,7 @@ const Login = () => {
   // login api call
   const onSubmit = async (submit) => {
     console.log(submit);
-    const response = await fetch('http://localhost:5000/api/login', {
+    const response = await fetch('https://goods4love.herokuapp.com/api/login', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(submit),

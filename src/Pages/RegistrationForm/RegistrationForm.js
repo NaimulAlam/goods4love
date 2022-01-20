@@ -47,7 +47,7 @@ const RegistrationForm = () => {
 
   // registration api call
   const onSubmit = (submit) => {
-    fetch('http://localhost:5000/api/register', {
+    fetch('https://goods4love.herokuapp.com/api/register', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(submit),
