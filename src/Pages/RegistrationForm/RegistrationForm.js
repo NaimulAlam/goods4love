@@ -1,11 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Navbar from '../../components/Navbar/Navbar';
 import './RegistrationForm.css';
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
   // form validation rules for yup
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -28,6 +30,7 @@ const RegistrationForm = () => {
     confirmPassword: Yup.string()
       .required('Confirm Password is required')
       .oneOf([Yup.ref('password')], 'Passwords must match'),
+    ocupation: Yup.string().notRequired(),
     city: Yup.string().required('City name is required'),
     zipCode: Yup.string()
       .required('Zip Code is required')
@@ -60,6 +63,7 @@ const RegistrationForm = () => {
         if (data.status === 'ok') {
           reset();
           alert('Sign Up Successfull!');
+          navigate('/login');
         } else {
           alert('Sign Up Failed!');
         }
@@ -135,7 +139,7 @@ const RegistrationForm = () => {
             <input
               className="form-control"
               type="text"
-              name="Ocupation"
+              name="ocupation"
               placeholder="Ocupation"
               {...register('ocupation')}
             />

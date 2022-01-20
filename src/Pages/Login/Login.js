@@ -35,27 +35,12 @@ const Login = () => {
     });
     const data = await response.json();
     if (data.user) {
-      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('token', data.user);
       window.location.href = '/dashboard';
     } else {
       console.log('error');
+      alert('Sign In Failed! Check your email and password');
     }
-    // .then((res) => {
-    //   return res.json();
-    // })
-    // .then((data) => {
-    //   console.log(data);
-    //   if (data.status === 'ok') {
-    //     // reset();
-    //     alert('Login Successfull!');
-    //   } else {
-    //     alert('login Failed!');
-    //   }
-    //   return data;
-    // })
-    // .catch((err) => {
-    //   console.log('err', err);
-    // });
   };
   console.log(errors);
 
