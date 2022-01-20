@@ -37,6 +37,7 @@ const UserDashboard = () => {
         LoggedUser();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateOcupation = async (e) => {
