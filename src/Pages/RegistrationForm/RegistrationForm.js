@@ -2,18 +2,24 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import Navbar from '../Shared/Navbar/Navbar';
+import Navbar from '../../components/Navbar/Navbar';
 import './RegistrationForm.css';
 
 const RegistrationForm = () => {
   // form validation rules for yup
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required').max(100),
-    lastName: Yup.string().required('Last name is required').max(100),
+    firstName: Yup.string()
+      .required('First name is required')
+      .min(3, 'First Name must contain 3 charecter')
+      .max(100, 'Max 100 charecter'),
+    lastName: Yup.string()
+      .required('Last name is required')
+      .min(3, 'First Name must contain 3 charecter')
+      .max(100, 'Max 100 charecter'),
     email: Yup.string()
       .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)
-      .lowercase()
-      .required('Email is required'),
+      .required('Email is required')
+      .lowercase(),
     password: Yup.string()
       .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,})/)
       .required('Password is required')
@@ -24,8 +30,9 @@ const RegistrationForm = () => {
       .oneOf([Yup.ref('password')], 'Passwords must match'),
     city: Yup.string().required('City name is required'),
     zipCode: Yup.string()
-      .matches(/^\d{5}?$/)
-      .required('Zip Code is required'),
+      .required('Zip Code is required')
+      .min(5, 'Zip code must be 5 digits')
+      .max(5, 'Zip code must be 5 digits'),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -38,8 +45,9 @@ const RegistrationForm = () => {
     formState: { errors },
   } = useForm(formOptions);
 
+  // registration api call
   const onSubmit = (submit) => {
-    fetch('https://goods4love.herokuapp.com/user/signup', {
+    fetch('http://localhost:5000/api/register', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(submit),
@@ -48,10 +56,14 @@ const RegistrationForm = () => {
         return res.json();
       })
       .then((data) => {
-        if (data) {
+        console.log(data);
+        if (data.status === 'ok') {
           reset();
           alert('Sign Up Successfull!');
+        } else {
+          alert('Sign Up Failed!');
         }
+        return data;
       })
       .catch((err) => {
         console.log('err', err);
@@ -145,7 +157,7 @@ const RegistrationForm = () => {
               placeholder="Zip Code"
               {...register('zipCode')}
             />
-            <div className="invalid-feedback">Enter the Zip Code</div>
+            <div className="invalid-feedback">{errors.zipCode?.message}</div>
           </div>
           <div className="col-12 position-relative">
             <input

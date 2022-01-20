@@ -1,0 +1,13 @@
+li {
+  list-style: none;
+}
+.list-unstyled {
+  padding-right: 8vw;
+}
+
+@media (max-width: 768px) {
+  .contactForm {
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+  }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Services.css';
 
 const Offers = () => {
@@ -11,7 +12,7 @@ const Offers = () => {
               <div className="content">
                 <h6 className="category">Become a Valounteer</h6>
                 <h4 className="title">
-                  <a href="#Valounteer">Valounteer</a>
+                  <Link to="/#Valounteer">Valounteer</Link>
                 </h4>
                 <p className="description">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ducimus repellendus doloribus
@@ -29,7 +30,7 @@ const Offers = () => {
               <div className="content">
                 <h6 className="category">Donate money</h6>
                 <h4 className="title">
-                  <a href="#Donations">Donations</a>
+                  <Link to="/#Donations">Donations</Link>
                 </h4>
                 <p className="description">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ducimus repellendus doloribus
@@ -47,7 +48,7 @@ const Offers = () => {
               <div className="content">
                 <h6 className="category">Donate Items</h6>
                 <h4 className="title">
-                  <a href="#Donations">Donations</a>
+                  <Link to="/#Donations">Donations</Link>
                 </h4>
                 <p className="description">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ducimus repellendus doloribus

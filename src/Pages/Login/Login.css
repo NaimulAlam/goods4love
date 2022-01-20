@@ -1,7 +1,7 @@
 .loginForm {
   margin: auto;
   width: 40%;
-  background-color: rgb(163, 236, 212);
+  background-color: rgb(255, 255, 255);
 }
 
 @media (max-width: 768px) {

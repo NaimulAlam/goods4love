@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Wellcome.css';
 import loveInHands from '../../../Assests/loveOnHands.jpg';
 
@@ -23,9 +24,9 @@ const Wellcome = () => {
                   </p>
                 </div>
                 <div className="entry-footer mt-5">
-                  <a href="#About" className="btn gradient-bg mr-2">
+                  <Link to="/#About" className="btn gradient-bg mr-2">
                     Read More
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

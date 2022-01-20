@@ -28,14 +28,14 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/#AboutUs">
+                <Link className="nav-link" to="/#AboutUs">
                   About Us
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/#Donate">
+                <Link className="nav-link" to="/#Donate">
                   Donate
-                </a>
+                </Link>
               </li>
             </ul>
             <Link className="btn btn-outline-warning me-lg-5" to="/login">
