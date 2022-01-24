@@ -1,0 +1,9 @@
+.side-menu {
+  background-color: #f5f5f5;
+}
+
+@media screen and (max-width: 992px) {
+  .side-menu {
+    padding-top: 0px;
+  }
+}
