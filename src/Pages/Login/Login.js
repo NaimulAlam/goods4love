@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -7,6 +7,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import './Login.css';
 
 const Login = () => {
+  const navigate = useNavigate();
   const loginSchema = Yup.object().shape({
     email: Yup.string()
       .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)
@@ -36,7 +37,7 @@ const Login = () => {
     const data = await response.json();
     if (data.user) {
       localStorage.setItem('token', data.user);
-      window.location.href = '/dashboard';
+      navigate('/dashboard');
     } else {
       console.log('error');
       alert('Sign In Failed! Check your email and password');

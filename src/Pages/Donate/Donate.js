@@ -1,27 +1,191 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import jwt from 'jsonwebtoken';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 
 const Donate = () => {
-  const [donation, setDonation] = React.useState(0);
+  const navigate = useNavigate();
+  const [loggedUser, setLoggedUser] = useState({});
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    console.log('clicked');
-    return setDonation(donation + 1);
+  // form validation rules for yup
+  const paymentValidationSchema = Yup.object().shape({
+    email: Yup.string()
+      .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)
+      .required('Email is required')
+      .lowercase(),
+    contactNumber: Yup.string()
+      .required('contact number is required')
+      .min(9, 'contact No. must be 9 digits')
+      .max(13, 'contact No. must be 13 digits'),
+    cause: Yup.string().required('Please select a cause'),
+    amount: Yup.number().required('Please enter amount'),
+  });
+
+  const formOptions = { resolver: yupResolver(paymentValidationSchema) };
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm(formOptions);
+
+  async function LoggedUser() {
+    const req = await fetch('http://localhost:5000/api/userinfo', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    });
+    const data = await req.json();
+    if (data.status === 'ok') {
+      setLoggedUser(data.user);
+    } else {
+      alert(data.message);
+    }
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const user = jwt.decode(token);
+      if (!user) {
+        console.log('err', 'Error');
+        localStorage.removeItem('token');
+        navigate('/login');
+      } else {
+        console.log('User', user);
+        LoggedUser();
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // registration api call
+  const onSubmit = (submit) => {
+    const donationData = {
+      ...submit,
+      firstName: loggedUser.firstName,
+      lastName: loggedUser.lastName,
+      city: loggedUser.city,
+      uid: loggedUser._id,
+    };
+    console.log('submit', donationData);
+    fetch('http://localhost:5000/api/donate', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-access-token': localStorage.getItem('token') },
+      body: JSON.stringify(donationData),
+    })
+      .then((res) => {
+        console.log('res', res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (data.status === 'ok') {
+          reset();
+          alert('Donation Successfull! Thank you for your support');
+        } else {
+          alert('Donation Failed! Please try again');
+        }
+        return data;
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
+    // display form data on success
+    // alert(`SUCCESS!! :-)\n\n${JSON.stringify(data, null, 4)}`);
   };
+  console.log(errors);
+  // console.log(loggedUser);
+
   return (
     <div>
       <div className="container-fluid">
-        <div className="row">
+        <div className="row g-2">
           <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 side-menu">
             <Sidebar />
           </div>
           <div className="col py-3" id="profile">
+            <div>
+              <h1>Hi, {loggedUser.lastName}! </h1>
+              <p>You are so great! you are going to help on cause.</p>
+            </div>
             <div className="card card-body mt-4 me-auto">
-              <h2 className="card-title" id="showDonation">
-                {donation}
-              </h2>
-              <input className="btn btn-primary" onClick={handleClick} type="button" value="Donate" />
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="col-12 position-relative">
+                  <input
+                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    {...register('email')}
+                  />
+                  <div className="invalid-feedback">Please Use Valid Email Address</div>
+                </div>
+                <div className="col-12 position-relative">
+                  <input
+                    className={`form-control ${errors.contactNumber ? 'is-invalid' : ''}`}
+                    type="text"
+                    name="contactNumber"
+                    placeholder="Contact/ Phone Number"
+                    {...register('contactNumber')}
+                  />
+                  <div className="invalid-feedback">Please Use Valid Contact Number</div>
+                </div>
+                <div className="col-12 position-relative">
+                  <select
+                    className={`form-control ${errors.cause ? 'is-invalid' : ''}`}
+                    name="cause"
+                    {...register('cause')}
+                  >
+                    <option value="">Select your cause...</option>
+                    <option value="Save Children">Save Children</option>
+                    <option value="Save Earth">Save The Earth</option>
+                    <option value="Help Elderly">Help Elderly</option>
+                  </select>
+                  <div className="invalid-feedback">{errors.cause?.message}</div>
+                </div>
+                <div className="col-12 position-relative">
+                  <input
+                    className={`form-control ${errors.amount ? 'is-invalid' : ''}`}
+                    type="number"
+                    name="amount"
+                    placeholder="Amount"
+                    {...register('amount')}
+                  />
+                  <div className="invalid-feedback">Please enter valid amount</div>
+                </div>
+                <div className="col-12 position-relative">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="termsAndConditions"
+                    id="termsAndConditions"
+                    required
+                  />
+                  <label className="form-check-label mx-2" htmlFor="termsAndConditions">
+                    I agree to all terms and conditions
+                  </label>
+                  <div className="invalid-tooltip">Please agree to the terms and conditions.</div>
+                </div>
+                <div className="col-12 text-center">
+                  <button className="btn btn-primary px-5" type="submit">
+                    Submit form
+                  </button>
+                  <button
+                    className="btn btn-danger float-end"
+                    type="button"
+                    onClick={() => {
+                      reset();
+                    }}
+                  >
+                    Reset
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
