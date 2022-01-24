@@ -3,11 +3,13 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require('./models/user.model.js');
+const Donation = require('./models/donation.model.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+const { ObjectId } = require('mongodb');
+
 // const { MongoClient } = require('mongodb');
-// const { ObjectId } = require('mongodb');
 // const fileUpload = require('express-fileupload');
 
 const port = process.env.PORT || 5000;
@@ -91,7 +93,7 @@ app.get('/api/userInfo', async (req, res) => {
         const email = decoded.email;
         const user = await User.findOne({ email: email });
 
-        return res.json({ status: 'ok', ocupation: user.ocupation });
+        return res.json({ status: 'ok', user: user });
     } catch (err) {
         console.log(err);
         res.json({status: 'error', message: 'Invalid User'});
@@ -117,27 +119,30 @@ app.post('/api/userInfoUpdate', async (req, res) => {
     }
 })
 
+// donation info route mongoose
 
-// async function run() {
-//     try {
-//         await client.connect();
-//         const database = client.db(process.env.DB_NAME);
-//         const usersCollection = database.collection('users');
-//         // perform actions on the collection object
+app.post('/api/donate', async (req, res) => {
+    const token = req.headers['x-access-token'];
+    console.log(req.body);
+    try {
+        await Donation.create({
+            email: req.body.email,
+            contactNumber: req.body.contactNumber,
+            cause: req.body.cause,
+            amount: req.body.amount,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            city: req.body.city,
+            uid: req.body.uid,
+        })
+        
+        return res.json({ status: 'ok', message: 'Donation Successfull, Thank you for your support :)' });
+    } catch (err) { 
+        console.error(err);
+        return res.json({ status:'error', message: 'Plese check your credentials' });
+    }
+});
 
-//         app.get('/users/:id', async (req, res) => {
-//             const { id } = req.params;
-//             const query = { _id: ObjectId(id) };
-//             const result = await usersCollection.findOne(query);
-//             res.json(result);
-//         });
-//     } catch {
-//         console.error(error);
-//     } finally {
-//         await client.close();
-//         // await client.close();
-//     }
-// }
 
 app.get('/', (req, res) => {
     res.send('Hello! form Goods4Love');
