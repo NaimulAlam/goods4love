@@ -34,7 +34,7 @@ const Donate = () => {
   } = useForm(formOptions);
 
   async function LoggedUser() {
-    const req = await fetch('http://localhost:5000/api/userinfo', {
+    const req = await fetch('https://goods4love.herokuapp.com/api/userinfo', {
       headers: {
         'x-access-token': localStorage.getItem('token'),
       },
@@ -73,7 +73,7 @@ const Donate = () => {
       uid: loggedUser._id,
     };
     console.log('submit', donationData);
-    fetch('http://localhost:5000/api/donate', {
+    fetch('https://goods4love.herokuapp.com/api/donate', {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-access-token': localStorage.getItem('token') },
       body: JSON.stringify(donationData),
