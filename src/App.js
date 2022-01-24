@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Donate from './Pages/Donate/Donate';
 import Home from './Pages/Homepage/Home/Home';
 import Login from './Pages/Login/Login';
 import NotFound from './Pages/NotFound/NotFound';
@@ -16,6 +17,7 @@ function App() {
         <Route path="/registration" element={<RegistrationForm />} />
         <Route path="/dashboard" element={<UserDashboard />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/donate" element={<Donate />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </div>

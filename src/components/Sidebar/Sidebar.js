@@ -16,6 +16,11 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className="nav-item">
+          <Link to="/donate" className="nav-link px-0 align-middle">
+            <i className="fs-4 bi-speedometer2" /> <span className="ms-1 d-none d-sm-inline">Donate</span>
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link to="/donationList" className="nav-link px-0 align-middle">
             <i className="fs-4 bi-card-list" /> <span className="ms-1 d-none d-sm-inline">Donation List</span>
           </Link>
