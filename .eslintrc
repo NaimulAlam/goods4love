@@ -2,6 +2,11 @@
   "extends": ["wesbos"],
   "rules": {
     "no-console": 0,
+    "react/destructuring-assignment": [
+      0,
+      "always",
+      { "ignoreClassFields": "boolean" }
+    ],
     "prettier/prettier": [
       "error",
       {

@@ -1,0 +1,12 @@
+.donationTable {
+  counter-reset: Serial;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr td:first-child::before {
+  counter-increment: Serial;
+  content: counter(Serial);
+}

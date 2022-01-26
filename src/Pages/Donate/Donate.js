@@ -102,91 +102,89 @@ const Donate = () => {
   // console.log(loggedUser);
 
   return (
-    <div>
-      <div className="container-fluid">
-        <div className="row g-2">
-          <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 side-menu">
-            <Sidebar />
+    <div className="container-fluid">
+      <div className="row g-md-2">
+        <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 side-menu">
+          <Sidebar />
+        </div>
+        <div className="col py-3" id="profile">
+          <div>
+            <h1>Hi, {loggedUser.lastName}! </h1>
+            <p>You are so great! you are going to help on cause.</p>
           </div>
-          <div className="col py-3" id="profile">
-            <div>
-              <h1>Hi, {loggedUser.lastName}! </h1>
-              <p>You are so great! you are going to help on cause.</p>
-            </div>
-            <div className="card card-body mt-4 me-auto">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="col-12 position-relative">
-                  <input
-                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                    type="text"
-                    name="email"
-                    placeholder="Email"
-                    {...register('email')}
-                  />
-                  <div className="invalid-feedback">Please Use Valid Email Address</div>
-                </div>
-                <div className="col-12 position-relative">
-                  <input
-                    className={`form-control ${errors.contactNumber ? 'is-invalid' : ''}`}
-                    type="text"
-                    name="contactNumber"
-                    placeholder="Contact/ Phone Number"
-                    {...register('contactNumber')}
-                  />
-                  <div className="invalid-feedback">Please Use Valid Contact Number</div>
-                </div>
-                <div className="col-12 position-relative">
-                  <select
-                    className={`form-control ${errors.cause ? 'is-invalid' : ''}`}
-                    name="cause"
-                    {...register('cause')}
-                  >
-                    <option value="">Select your cause...</option>
-                    <option value="Save Children">Save Children</option>
-                    <option value="Save Earth">Save The Earth</option>
-                    <option value="Help Elderly">Help Elderly</option>
-                  </select>
-                  <div className="invalid-feedback">{errors.cause?.message}</div>
-                </div>
-                <div className="col-12 position-relative">
-                  <input
-                    className={`form-control ${errors.amount ? 'is-invalid' : ''}`}
-                    type="number"
-                    name="amount"
-                    placeholder="Amount"
-                    {...register('amount')}
-                  />
-                  <div className="invalid-feedback">Please enter valid amount</div>
-                </div>
-                <div className="col-12 position-relative">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="termsAndConditions"
-                    id="termsAndConditions"
-                    required
-                  />
-                  <label className="form-check-label mx-2" htmlFor="termsAndConditions">
-                    I agree to all terms and conditions
-                  </label>
-                  <div className="invalid-tooltip">Please agree to the terms and conditions.</div>
-                </div>
-                <div className="col-12 text-center">
-                  <button className="btn btn-primary px-5" type="submit">
-                    Submit form
-                  </button>
-                  <button
-                    className="btn btn-danger float-end"
-                    type="button"
-                    onClick={() => {
-                      reset();
-                    }}
-                  >
-                    Reset
-                  </button>
-                </div>
-              </form>
-            </div>
+          <div className="card card-body mt-4 me-auto">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="col-12 position-relative">
+                <input
+                  className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  {...register('email')}
+                />
+                <div className="invalid-feedback">Please Use Valid Email Address</div>
+              </div>
+              <div className="col-12 position-relative">
+                <input
+                  className={`form-control ${errors.contactNumber ? 'is-invalid' : ''}`}
+                  type="text"
+                  name="contactNumber"
+                  placeholder="Contact/ Phone Number"
+                  {...register('contactNumber')}
+                />
+                <div className="invalid-feedback">Please Use Valid Contact Number</div>
+              </div>
+              <div className="col-12 position-relative">
+                <select
+                  className={`form-control ${errors.cause ? 'is-invalid' : ''}`}
+                  name="cause"
+                  {...register('cause')}
+                >
+                  <option value="">Select your cause...</option>
+                  <option value="Save Children">Save Children</option>
+                  <option value="Save Earth">Save The Earth</option>
+                  <option value="Help Elderly">Help Elderly</option>
+                </select>
+                <div className="invalid-feedback">{errors.cause?.message}</div>
+              </div>
+              <div className="col-12 position-relative">
+                <input
+                  className={`form-control ${errors.amount ? 'is-invalid' : ''}`}
+                  type="number"
+                  name="amount"
+                  placeholder="Amount"
+                  {...register('amount')}
+                />
+                <div className="invalid-feedback">Please enter valid amount</div>
+              </div>
+              <div className="col-12 position-relative">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  name="termsAndConditions"
+                  id="termsAndConditions"
+                  required
+                />
+                <label className="form-check-label mx-2" htmlFor="termsAndConditions">
+                  I agree to all terms and conditions
+                </label>
+                <div className="invalid-tooltip">Please agree to the terms and conditions.</div>
+              </div>
+              <div className="col-12 text-center">
+                <button className="btn btn-primary px-5" type="submit">
+                  Submit form
+                </button>
+                <button
+                  className="btn btn-danger float-end"
+                  type="button"
+                  onClick={() => {
+                    reset();
+                  }}
+                >
+                  Reset
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
