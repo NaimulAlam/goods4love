@@ -69,7 +69,7 @@ const Sidebar = () => {
             <li>
               <Link
                 onClick={() => {
-                  localStorage.setItem('token', '');
+                  localStorage.removeItem('token');
                 }}
                 className="dropdown-item"
                 to="#signOut"

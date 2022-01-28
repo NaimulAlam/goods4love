@@ -50,7 +50,8 @@ const RegistrationForm = () => {
 
   // registration api call
   const onSubmit = (submit) => {
-    fetch('https://goods4love.herokuapp.com/api/register', {
+    const url = 'https://goods4love.herokuapp.com/api/register';
+    fetch(url, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(submit),

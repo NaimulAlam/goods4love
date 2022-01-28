@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <div className="container">
-      <footer className="py-5">
+      <footer className="pt-5">
         <div className="row">
           <div className="col-12 col-md-6">
             <h4 className="ps-2 pt-2 pb-2">Goods 4 Love</h4>
@@ -50,7 +50,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-6" id="ContactUs">
             <div className="row">
               <div className="col-12 col-md-6 px-2">
                 <h5 className="ps-2 pt-2 text-center pb-2">Contact Us</h5>
@@ -64,22 +64,22 @@ const Footer = () => {
                 <h5>Useful links</h5>
                 <ul className="nav flex-column">
                   <li className="nav-item mb-2">
-                    <Link to="/#Home" className="nav-link p-0 text-muted">
+                    <Link to="/" className="nav-link p-0 text-muted">
                       Home
                     </Link>
                   </li>
                   <li className="nav-item mb-2">
-                    <Link to="/#About" className="nav-link p-0 text-muted">
+                    <a href="/#AboutUs" className="nav-link p-0 text-muted">
                       About
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item mb-2">
-                    <Link to="/#Donate" className="nav-link p-0 text-muted">
+                    <a href="/#Donate" className="nav-link p-0 text-muted">
                       Donate
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item mb-2">
-                    <Link to="/#FAQs" className="nav-link p-0 text-muted">
+                    <Link to="/FAQs" className="nav-link p-0 text-muted">
                       FAQs
                     </Link>
                   </li>
@@ -104,7 +104,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="d-flex justify-content-between py-4 my-4 border-top">
+        <div className="d-flex justify-content-between pt-5 mt-5 border-top">
           <p>
             &copy; {presentYear} All rights reserved | by <span style={{ color: 'red' }}> Goods4Love</span>
           </p>

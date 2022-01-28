@@ -4,7 +4,7 @@ import './Services.css';
 
 const Offers = () => {
   return (
-    <div className="container serviceDiv  ">
+    <div className="container serviceDiv" id="Donate">
       <div className="row">
         <div className="col-md-4 col-sm-6 content-card">
           <div className="card-big-shadow">

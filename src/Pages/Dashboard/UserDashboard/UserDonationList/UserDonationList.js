@@ -7,7 +7,7 @@ const DonationList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const url = 'http://localhost:5000/api/alldonations';
+    const url = 'https://goods4love.herokuapp.com/api/alldonations';
 
     const GetDonations = async () => {
       try {

@@ -1,62 +1,58 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
 import Sidebar from '../../components/Sidebar/Sidebar';
 
 const UserProfile = () => {
-  const navigate = useNavigate();
-  const [ocupation, setOcupation] = useState('');
+  const [user, setUser] = useState({});
+  // const [tmpEmail, setTmpEmail] = useState('');
+  // const [tmpfirstname, setTmpFirstName] = useState('');
+  const [tmpLastName, setTmpLastName] = useState('');
   const [tmpOcupation, setTmpOcupation] = useState('');
 
   async function LoggedUser() {
-    const req = await fetch('https://goods4love.herokuapp.com/api/userinfo', {
+    const url = 'https://goods4love.herokuapp.com/api/userInfo';
+    const req = await fetch(url, {
       headers: {
         'x-access-token': localStorage.getItem('token'),
       },
     });
     const data = await req.json();
-    console.log(data);
+    console.log('dt', data.user);
     if (data.status === 'ok') {
-      setOcupation(data.ocupation);
+      setUser(data.user);
+      // setTmpEmail(data.user.email);
+      // setTmpFirstName(data.user.firstName);
+      setTmpLastName(data.user.lastName);
     } else {
       alert(data.message);
     }
   }
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const user = jwt.decode(token);
-
-      if (!user) {
-        // console.log('user', user);
-        localStorage.removeItem('token');
-        navigate('/login');
-      } else {
-        // console.log('err', user);
-        LoggedUser();
-      }
-    }
+    LoggedUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const updateOcupation = async (e) => {
+  const updateUserInfo = async (e) => {
     e.preventDefault();
-    const req = await fetch('https://goods4love.herokuapp.com/api/userInfoUpdate', {
+    const url = 'https://goods4love.herokuapp.com/api/userInfoUpdate';
+    const req = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': localStorage.getItem('token'),
       },
-      body: JSON.stringify({ ocupation: tmpOcupation }),
+      body: JSON.stringify({
+        lastName: tmpLastName,
+        ocupation: tmpOcupation,
+      }),
     });
     const data = await req.json();
     if (data.status === 'ok') {
-      setOcupation(tmpOcupation);
-      setTmpOcupation('');
+      setUser(tmpLastName, tmpOcupation);
     } else {
       alert(data.message);
     }
+    LoggedUser();
   };
 
   return (
@@ -68,17 +64,33 @@ const UserProfile = () => {
         <div className="col py-3" id="profile">
           <div className="card card-body mt-4">
             <h2 className="card-title">User Profile</h2>
-            <h2>Your ocupation is: {`${ocupation}` || 'No ocupation found'}</h2>
-            <form onSubmit={updateOcupation}>
-              <input
-                type="text"
-                placeholder="Ocupation"
-                value={tmpOcupation}
-                onChange={(e) => {
-                  return setTmpOcupation(e.target.value);
-                }}
-              />
-              <input type="submit" value="Update Ocupation" />
+            <form onSubmit={updateUserInfo}>
+              <div className="row">
+                <div className="col-md-6">
+                  <p>Your last name is: {user ? `${user.lastName}` : 'No last name found'}</p>
+                  <input
+                    type="text"
+                    placeholder="Update Last Name"
+                    value={tmpLastName}
+                    onChange={(e) => {
+                      return setTmpLastName(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="col-md-6">
+                  <p>Your ocupation is: {user ? `${user.ocupation}` : 'No ocupation found'}</p>
+                  <input
+                    type="text"
+                    placeholder="Update ocupation"
+                    value={tmpOcupation}
+                    onChange={(e) => {
+                      return setTmpOcupation(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <br />
+              <input type="submit" value="Update" />
             </form>
           </div>
         </div>

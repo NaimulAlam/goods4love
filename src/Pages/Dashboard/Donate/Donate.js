@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-import jwt from 'jsonwebtoken';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 
 const Donate = () => {
-  const navigate = useNavigate();
   const [loggedUser, setLoggedUser] = useState({});
 
   // form validation rules for yup
@@ -33,37 +30,25 @@ const Donate = () => {
     formState: { errors },
   } = useForm(formOptions);
 
-  async function LoggedUser() {
-    const req = await fetch('https://goods4love.herokuapp.com/api/userinfo', {
-      headers: {
-        'x-access-token': localStorage.getItem('token'),
-      },
-    });
-    const data = await req.json();
-    if (data.status === 'ok') {
-      setLoggedUser(data.user);
-    } else {
-      alert(data.message);
-    }
-  }
-
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const user = jwt.decode(token);
-      if (!user) {
-        console.log('err', 'Error');
-        localStorage.removeItem('token');
-        navigate('/login');
+    async function LoggedUser() {
+      const url = 'https://goods4love.herokuapp.com/api/userinfo';
+      const req = await fetch(url, {
+        headers: {
+          'x-access-token': localStorage.getItem('token'),
+        },
+      });
+      const data = await req.json();
+      if (data.status === 'ok') {
+        setLoggedUser(data.user);
       } else {
-        console.log('User', user);
-        LoggedUser();
+        alert(data.message);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    LoggedUser();
   }, []);
 
-  // registration api call
+  // Donations Details Submit api call
   const onSubmit = (submit) => {
     const donationData = {
       ...submit,
@@ -73,7 +58,8 @@ const Donate = () => {
       uid: loggedUser._id,
     };
     console.log('submit', donationData);
-    fetch('https://goods4love.herokuapp.com/api/donate', {
+    const url = 'https://goods4love.herokuapp.com/api/donate';
+    fetch(url, {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-access-token': localStorage.getItem('token') },
       body: JSON.stringify(donationData),

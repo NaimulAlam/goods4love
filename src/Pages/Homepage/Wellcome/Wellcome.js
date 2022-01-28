@@ -12,9 +12,10 @@ const Wellcome = () => {
             <div className="col-12 col-lg-6 order-2 order-lg-1">
               <div className="welcome-content">
                 <header className="entry-header">
-                  <h2 className="entry-title">Wellcome to our Charity</h2>
+                  <h2 className="entry-title">About Us</h2>
                 </header>
                 <div className="entry-content mt-5">
+                  <h2 className="entry-title">Wellcome to our Charity</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestib ulum mauris quis
                     aliquam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris
