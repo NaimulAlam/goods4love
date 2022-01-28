@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\AddDonationController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\AuctionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +20,28 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-    //Route::post('donation',[DonationController::class, 'donation']);
-});
+Route::group(
+    [
+    'middleware' => 'api',
+    'prefix' => 'auth',
+    ],
+    function ($router){
+        Route::post('login', [UserController::class, 'login']);
+        Route::post('register', [UserController::class, 'register']);
+        Route::post('logout', [UserController::class, 'logout']);
+        Route::get('userProfile', [UserController::class, 'userProfile']);
+        Route::post('refresh', [UserController::class, 'refresh']);
+    }
 
-Route::post('register',[UserController::class, 'register']);
-Route::post('login',[UserController::class, 'login']);
+);
+
+//Route::post('register',[UserController::class, 'register']);
+//Route::post('login',[UserController::class, 'login']);
+Route::post('userInfo',[UserController::class, 'validateUser']);
 Route::post('donation',[DonationController::class, 'donation']);
 Route::post('addDonation',[AddDonationController::class, 'addDonation']);
 Route::post('addDonationList',[AddDonationController::class, 'list']);
 Route::post('makeAdmin',[AdminController::class, 'makeAdmin']);
+Route::post('newReview',[ReviewController::class, 'newReview']);
+Route::post('newAuction',[AuctionController::class, 'newAuction']);
+Route::post('auction',[AuctionController::class, 'updateAuction']);
