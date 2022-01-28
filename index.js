@@ -111,7 +111,7 @@ async function run() {
                 const decoded = jwt.verify(token, 'secret123');
                 const { email } = decoded;
                 const user = await User.findOne({ email });
-
+                console.log(user);
                 return res.json({ status: 'ok', user });
             } catch (err) {
                 console.log(err);
@@ -121,9 +121,23 @@ async function run() {
 
         // update user information mongoose
         app.post('/api/userInfoUpdate', verifyToken, async (req, res) => {
+            const token = req.headers['x-access-token'];
             try {
-                const { email } = req.query.email;
-                await User.updateOne({ email }, { $set: { ocupation: req.body.ocupation } });
+                const decoded = jwt.verify(token, 'secret123');
+                const { email } = decoded;
+                await User.updateOne(
+                    { email },
+                    {
+                        $set: {
+                            firstName: req.body.firstName,
+                            lastName: req.body.lastName,
+                            eamil: req.body.email,
+                            ocupation: req.body.ocupation,
+                            city: req.body.city,
+                            zipCode: req.body.city,
+                        },
+                    }
+                );
 
                 return res.json({ status: 'ok', message: 'Ocupation Updated' });
             } catch (err) {
@@ -179,7 +193,7 @@ async function run() {
                 }
                 const userDonations = await Donations.find({ uid: ObjectId(user._id) });
                 console.log('uid', userDonations);
-                return res.json({ status: 'ok', donationList: userDonations });
+                return res.json({ status: 'ok', userDonations });
             } catch {
                 return res.json({ status: 'error', message: 'error' });
             }
