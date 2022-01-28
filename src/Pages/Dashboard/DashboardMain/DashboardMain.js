@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Sidebar from '../../components/Sidebar/Sidebar';
+import Sidebar from '../../../components/Sidebar/Sidebar';
 
-const Dashboard = () => {
+const DashboardMain = () => {
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
@@ -116,4 +116,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardMain;

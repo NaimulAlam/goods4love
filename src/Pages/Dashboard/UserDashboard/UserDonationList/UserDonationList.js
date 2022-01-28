@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../../../components/Sidebar/Sidebar';
+import Sidebar from '../../../../components/Sidebar/Sidebar';
 import DonationListCard from './DonationListCard';
 
 const DonationList = () => {
