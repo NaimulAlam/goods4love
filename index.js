@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const { ObjectId } = require('mongodb');
+// const { ObjectId } = require('mongodb');
 const Donations = require('./models/donations.model');
 const User = require('./models/user.model');
 
@@ -32,9 +32,9 @@ async function verifyToken(req, res, next) {
         try {
             const decoded = jwt.verify(token, 'secret123');
             const { email } = decoded;
-            const user = await User.findOne({ email });
+            const LoggedUser = await User.findOne({ email });
 
-            return res.json({ status: 'ok', user });
+            return res.json({ status: 'ok', LoggedUser });
         } catch (err) {
             console.log(err);
             return res.json({ status: 'error', message: 'Invalid User' });
@@ -183,19 +183,26 @@ async function run() {
         });
 
         // get all donations of a user route mongoose
-        app.get('/api/:id', async (req, res) => {
+        app.get('/api/userDonations', async (req, res) => {
+            const token = req.headers['x-access-token'];
             try {
-                const _id = req.params.id;
-                const user = await User.findById(_id);
-                const userEmail = user.email;
-                if (!userEmail) {
-                    return res.json({ status: 'error', message: 'error' });
+                const decoded = jwt.verify(token, 'secret123');
+                const { email } = decoded;
+                const DonationListUser = await User.findOne({ email });
+                // console.log(DonationListUser);
+                const userId = DonationListUser._id.toString();
+                if (!userId) {
+                    return res.json({ status: 'error', message: 'user not found' });
                 }
-                const userDonations = await Donations.find({ uid: ObjectId(user._id) });
-                console.log('uid', userDonations);
+                // console.log(userId);
+                const userDonations = await Donations.find({ uid: userId }).all(
+                    'userDonations',
+                    []
+                );
+                // console.log(userDonations);
                 return res.json({ status: 'ok', userDonations });
             } catch {
-                return res.json({ status: 'error', message: 'error' });
+                return res.json({ status: 'error', message: 'error catch' });
             }
         });
 
