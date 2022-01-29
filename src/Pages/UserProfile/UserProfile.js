@@ -23,7 +23,7 @@ const UserProfile = () => {
       // setTmpFirstName(data.user.firstName);
       setTmpLastName(data.user.lastName);
     } else {
-      alert(data.message);
+      console.log(data.message);
     }
   }
 
@@ -50,7 +50,7 @@ const UserProfile = () => {
     if (data.status === 'ok') {
       setUser(tmpLastName, tmpOcupation);
     } else {
-      alert(data.message);
+      console.log(data.message);
     }
     LoggedUser();
   };

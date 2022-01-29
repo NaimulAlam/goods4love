@@ -42,7 +42,7 @@ const Donate = () => {
       if (data.status === 'ok') {
         setLoggedUser(data.user);
       } else {
-        alert(data.message);
+        console.log(data.message);
       }
     }
     LoggedUser();
@@ -89,7 +89,7 @@ const Donate = () => {
 
   return (
     <div className="container-fluid">
-      <div className="row g-md-2">
+      <div className="row">
         <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 side-menu">
           <Sidebar />
         </div>

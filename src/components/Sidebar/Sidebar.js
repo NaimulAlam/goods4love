@@ -72,7 +72,7 @@ const Sidebar = () => {
                   localStorage.removeItem('token');
                 }}
                 className="dropdown-item"
-                to="#signOut"
+                to="/"
               >
                 Sign out
               </Link>
