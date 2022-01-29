@@ -7,9 +7,9 @@ const DonationList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const url = 'https://goods4love.herokuapp.com/api/alldonations';
+    const url = 'https://goods4love.herokuapp.com/api/userDonations';
 
-    const GetDonations = async () => {
+    const GetUserDonations = async () => {
       try {
         const res = await fetch(url, {
           headers: {
@@ -17,8 +17,8 @@ const DonationList = () => {
           },
         });
         const data = await res.json();
-        console.log('data', data.alldonations);
-        setDonationList(data.alldonations);
+        console.log('data', data);
+        setDonationList(data.userDonations);
         setIsLoading(false);
       } catch (err) {
         console.log('error', err);
@@ -26,7 +26,7 @@ const DonationList = () => {
         console.log('finally');
       }
     };
-    GetDonations();
+    GetUserDonations();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,7 +37,7 @@ const DonationList = () => {
           <Sidebar />
         </div>
         <div className="col-9 col-xl-10 px-sm-0 px-md-5 py-3 py-md-5" id="profile">
-          <h2>Your contributions for the causes: </h2>
+          <h2>Your contributions for the society: </h2>
           {isLoading && <h1>Loading...</h1>}
           {donationList?.length > 0 && (
             <div className="album py-5 bg-light">
