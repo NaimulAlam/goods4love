@@ -10,16 +10,18 @@
 
 Here is Our Goods4Love site's [Live Website Link](https://goods4love.netlify.app/)
 
-GitHub [Link-FrontEnd](https://github.com/NaimulAlam/goods4love/tree/frontend)
-GitHub [Link-Backend-Node](https://github.com/NaimulAlam/goods4love/tree/backend-naim)
-Github [Link-Backend-Laravel](https://github.com/NaimulAlam/goods4love/tree/backend-laravel)
+1. GitHub [Link-FrontEnd](https://github.com/NaimulAlam/goods4love/tree/frontend)
+2. GitHub [Link-Backend-Node](https://github.com/NaimulAlam/goods4love/tree/backend-naim)
+3. Github [Link-Backend-Laravel](https://github.com/NaimulAlam/goods4love/tree/backend-laravel)
 
-Importtan CMD for runnig the app on Local Machine:
+#Importtan CMD and steps for running the app on Local Machine:
 
-Frontend:
-step 1: npm inatall
-setp 2: npm start
+1. Frontend:
 
-Backend-Node:
-step 1: npm install
-step 2: npm run dev
+   1. npm inatall
+   2. npm start
+
+2. Backend-Node:
+
+   1. npm install
+   2. npm run dev
