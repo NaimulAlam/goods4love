@@ -4,5 +4,22 @@
 2. frontend branch for the frontend code
 3. backend branch for the backend code
 4. design branch for the designs, pictures, figma/adobe files and icons etc.
+5. now we hove backend-naim branch for backend creted by node, mongodb, mongoose and express.
+6. we have one more backend-laravel branch which backend is created by using laravel.
+7. So far Technology Used in our project are: Mongodb, Express, React, Node, JWT, bycrypt, Rect-router v6, Yap and React-Form for validation and Schema. Netlify for Hosting Frontend, Heroku for hosting node Backend. Bootstarp and custom CSS for design. Canva and figma for design mockups.
 
-Here is Our Goods4Love site's [Live link](https://goods4love.netlify.app/)
+Here is Our Goods4Love site's [Live Website Link](https://goods4love.netlify.app/)
+
+GitHub [Link-FrontEnd](https://github.com/NaimulAlam/goods4love/tree/frontend)
+GitHub [Link-Backend-Node](https://github.com/NaimulAlam/goods4love/tree/backend-naim)
+Github [Link-Backend-Laravel](https://github.com/NaimulAlam/goods4love/tree/backend-laravel)
+
+Importtan CMD for runnig the app on Local Machine:
+
+Frontend:
+step 1: npm inatall
+setp 2: npm start
+
+Backend-Node:
+step 1: npm install
+step 2: npm run dev
