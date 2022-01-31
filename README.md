@@ -1,4 +1,4 @@
-# We have now three branches here.
+# Goods 4 Love A Charity Website.
 
 1. This is our main branch. where we will provide our final work
 2. frontend branch for the frontend code
