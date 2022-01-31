@@ -15,13 +15,11 @@ const AdminSidebar = () => {
   };
 
   return (
-    <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-      <Link to="/" className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-danger text-decoration-none">
-        <Link to="/" className="navbar-brand ms-lg-5">
-          <img src={g4lLogo} alt="" />
-          <img className="rounded mx-auto d-block" src={g4lLogo} alt="" />
-        </Link>
-      </Link>
+    <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+      <div className="text-center pb-3 mb-md-0 mx-auto fw-bolder fs-1 text-decoration-none">
+        <span className="fs-5 d-none d-sm-inline">Goods4Love</span>
+      </div>
+      <img className="rounded mx-auto d-block" src={g4lLogo} alt="" />
       <ul className="nav nav-tabs flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="sidebar">
         <li className="nav-item">
           <Link to="/" className="nav-link px-0 align-middle">
