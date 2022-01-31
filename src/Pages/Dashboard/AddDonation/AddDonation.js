@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 
