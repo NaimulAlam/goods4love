@@ -29,16 +29,16 @@ const Navbar = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarMenu">
-            <Link to="/" className="navbar-brand ms-lg-5">
+            <a href="/#Home" className="navbar-brand ms-lg-5">
               <img src={g4lLogo} alt="" width="40" height="40" className="d-inline-block align-top" />
               <span className="mx-2 fs-3">Goods4Love</span>
-            </Link>
+            </a>
 
             <ul className="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">
+                <a className="nav-link active" aria-current="page" href="/#Home">
                   Home
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#AboutUs">

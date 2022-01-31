@@ -9,7 +9,7 @@ import './Header.css';
 
 const Header = () => {
   return (
-    <div>
+    <div id="Home">
       {/* This is Navbar */}
       <Navbar />
       {/* This is carousel */}

@@ -45,9 +45,11 @@ const Offers = () => {
                 $10<small className="text-muted fw-light">/or any amount</small>
               </h1>
               <p>You can donate as small as 10 PLN to any amount</p>
-              <button type="button" className="w-100 btn btn-lg btn-outline-danger">
-                Get started
-              </button>
+              <Link to="/registration">
+                <button type="button" className="w-100 btn btn-lg btn-outline-success">
+                  Get Started
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -64,9 +66,11 @@ const Offers = () => {
                 $10<small className="text-muted fw-light">/or any amount</small>
               </h1>
               <p>You can donate as small as 10 PLN to any amount</p>
-              <button type="button" className="w-100 btn btn-lg btn-outline-primary">
-                Donate Now
-              </button>
+              <Link to="/donate">
+                <button type="button" className="w-100 btn btn-lg btn-outline-success">
+                  Donate Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>
