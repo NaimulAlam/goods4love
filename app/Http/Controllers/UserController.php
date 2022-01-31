@@ -59,58 +59,7 @@ class UserController extends Controller
 
         return $this->createNewToken($token);
     }
-/*
-    function register(Request $req)
-    {
-        $user= new User;
-        $user->name=$req->input('firstName');
-        $user->surname=$req->input('lastName');
-        $user->email=$req->input('email');
-        $user->password= Hash::make($req->input('password'));
-        $user->ocupation=$req->input('ocupation');
-        $user->city=$req->input('city');
-        $user->zipCode=$req->input('zipCode');
-        if (User::where('email', $req->email)->exists()) {
-            return ["error"=>"Email already in use"];
-        }else{
-            $user->save();
-            return response()->json(['status' => 'ok', 'message' => 'Sign Up Successfull']);
-        }
-        
-    }
 
-*/
-/*
-    function login(Request $req)
-    {
-        $user= User::where('email', $req->email)->first();
-        if(!$user || !Hash::check($req->password, $user->password))
-        {
-            return ["error"=>"Email or password do not match"];
-        }
-        $getId = User::where('email', $user->email)->value('ID');
-        $isAdmin=Admin::where('u_id', $getId)->first();
-        if($isAdmin)
-        {
-            //return response()->json(['admin' => true, 'user' => $user]);
-            return response()->json(['admin' => true, 'ID' => $user->ID, 'email' => $user->email, 'name' => $user->name, 'surname' => $user->surname, 'ocupation' => $user->ocupation, 'city' => $user->city, 'zipCode' => $user->zipCode]);
-        }
-        else{
-            //return response()->json(['admin' => false, 'user' => $user]);
-            return response()->json(['admin' => false, 'ID' => $user->ID, 'email' => $user->email, 'name' => $user->name, 'surname' => $user->surname, 'ocupation' => $user->ocupation, 'city' => $user->city, 'zipCode' => $user->zipCode]);
-        }
-    }
-    */
-    /*
-    function validateUser(Request $req)
-    {
-
-    }
-    function updateOcupation(Request $req)
-    {
-
-    }
-    */
     public function userProfile()
     {
         return response()->json([
@@ -118,6 +67,31 @@ class UserController extends Controller
             "user" => auth()->user(),
             
     ]);
+    }
+
+    public function updateProfile(Request $req)
+    {
+        $validator = Validator::make($req->all(),[
+            'ocupation' => ['required', 'string', 'between:2,100'],
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+
+        if($validator->validated()){
+            $user = auth()->user();
+            $user->ocupation = $req->input('ocupation');
+            $user->save();
+
+            return response()->json([
+                "status" => 'ok',
+                "message" => 'User successfully updated'
+            ]);
+        }
+
+        
     }
 
 

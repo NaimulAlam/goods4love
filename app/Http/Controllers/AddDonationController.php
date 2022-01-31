@@ -7,6 +7,10 @@ use App\Models\AddDonation;
 
 class AddDonationController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
+
     function addDonation(Request $req)
     {
         $addDonation = new AddDonation;
@@ -17,8 +21,11 @@ class AddDonationController extends Controller
         return $addDonation;
     }
 
-    function list()
+    public function list()
     {
-        return AddDonation::all();
+        $allDonations =  AddDonation::all();
+        return response()->json([
+            "alldonations" => $allDonations
+        ]);
     }
 }

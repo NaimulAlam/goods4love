@@ -30,18 +30,22 @@ Route::group(
         Route::post('register', [UserController::class, 'register']);
         Route::post('logout', [UserController::class, 'logout']);
         Route::get('userProfile', [UserController::class, 'userProfile']);
+        Route::post('updateProfile', [UserController::class, 'updateProfile']);
         Route::post('refresh', [UserController::class, 'refresh']);
+        Route::post('donation',[DonationController::class, 'donation']);
+        Route::get('userDonationsList',[DonationController::class, 'userList']);
+        Route::get('allDonationsList',[DonationController::class, 'list']);
+        Route::post('addAdmin',[AdminController::class, 'addAdmin']);
+        Route::post('isAdmin',[AdminController::class, 'isAdmin']);
     }
 
 );
 
-//Route::post('register',[UserController::class, 'register']);
-//Route::post('login',[UserController::class, 'login']);
-Route::post('userInfo',[UserController::class, 'validateUser']);
-Route::post('donation',[DonationController::class, 'donation']);
+//Route::get('userDonationsList',[DonationController::class, 'list']);
+//Route::post('donation',[DonationController::class, 'donation']);
 Route::post('addDonation',[AddDonationController::class, 'addDonation']);
-Route::post('addDonationList',[AddDonationController::class, 'list']);
-Route::post('makeAdmin',[AdminController::class, 'makeAdmin']);
+//Route::post('addDonationList',[AddDonationController::class, 'list']);
+//Route::post('makeAdmin',[AdminController::class, 'makeAdmin']);
 Route::post('newReview',[ReviewController::class, 'newReview']);
 Route::post('newAuction',[AuctionController::class, 'newAuction']);
 Route::post('auction',[AuctionController::class, 'updateAuction']);

@@ -14,6 +14,14 @@ class Donation extends Model
      * @var string
      */
     protected $table = 'donation_request';
+    protected $fillable = [
+        'u_id',
+        'email',
+        'amount',
+        'phoneNumber',
+        'ad_Id',
+        
+    ];
 
     public $timestamps = false;
 }

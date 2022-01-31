@@ -5,22 +5,63 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class AdminController extends Controller
 {
-    function makeAdmin(Request $req)
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => 'isAdmin']);
+    }
+
+    public function addAdmin(Request $req)
     {
-        //check if email is user
-        $admin = new Admin;
-        $email=$req->input('email');
-        $user_data = User::where('email', $email)->value('ID');
-        if(Admin::where('u_id', $user_data)->first())
-        {
-            return "This user is already an admin";
+        $validator = Validator::make($req->all(),[
+            'email' => ['required', 'string', 'email'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
         }
-        $admin->u_id=$user_data;
-        $admin->save();
-        return $admin;
+        
+        if($validator->validated()){
+            $user = auth()->user();
+            $userId = $user->where('email', $user->email)->value('id');
+            if(Admin::where('u_id', $userId)->first())
+            {
+                return response()->json([
+                    "message" => 'User is already an admin'
+                ]);
+            }
+            $admin = Admin::create(
+                ['u_id' => $userId]
+            );
+
+            return response()->json([
+                "status" => 'ok',
+                "message" => 'User successfully updated'
+            ]);
+        }
+        
     
+    }
+
+    public function isAdmin(Request $req)
+    {
+        $loggingId = User::where('email',$req->email)->value('id');
+        $isAdmin = Admin::where('u_id',$loggingId)->value('id');
+        if($isAdmin)
+        {
+            return response()->json([
+                "status" => 'ok',
+                "message" => 'Admin found'
+            ]);
+        }else
+        {
+            return response()->json([
+                "status" => 'error',
+                "message" => 'Admin not found'
+            ]);
+        }
     }
 }
