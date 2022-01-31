@@ -1,10 +1,32 @@
-import React from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Sidebar from '../../../components/Sidebar/Sidebar';
 
 const DashboardMain = () => {
+  const [loggedUser, setLoggedUser] = useState('');
+
+  useEffect(() => {
+    async function LoggedUser() {
+      const url = 'https://goods4love.herokuapp.com/api/userinfo';
+      const req = await fetch(url, {
+        headers: {
+          'x-access-token': localStorage.getItem('token'),
+        },
+      });
+      const data = await req.json();
+      if (data.status === 'ok') {
+        setLoggedUser(data.userInfo);
+      } else {
+        console.log(data.message);
+      }
+    }
+    LoggedUser();
+  }, []);
+
   return (
-    <div className="container-fluid">
+    <div className="container-fluid text-center">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 side-menu">
           <Sidebar />
@@ -12,8 +34,15 @@ const DashboardMain = () => {
         <div className="col py-3">
           <div className="tab-content">
             <div className="tab-pane fade show active" id="donationList">
-              <h4 className="mt-2">Main Dashboard</h4>
-              <p>Aliquip placeat salvia cillum iphone. Seitan aliquip</p>
+              <h1 className="mt-2">Main Dashboard</h1>
+              <h3>Hello! {loggedUser?.lastName}.</h3>
+              <h4>Welcome to your Dashboard.</h4>
+            </div>
+            <div className="m-5">
+              <h5>Do you wnat to update your Profile?</h5>
+              <Link className="btn btn-lg btn-outline-primary mt-5 " to="/profile">
+                Update Your Profile
+              </Link>
             </div>
             <div className="tab-pane fade" id="allDonations">
               <h4 className="mt-2">allDonations</h4>
@@ -30,88 +59,6 @@ const DashboardMain = () => {
           </div>
         </div>
       </div>
-      {/* <div className="container-fluid text-center">
-        <div className="row">
-          <div className="col-md-3 side-menue">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-              <div className="container-fluid">
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#sideMenuBtn"
-                  aria-controls="sideMenuBtn"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span className="navbar-toggler-icon" />
-                </button>
-                <div className="collapse navbar-collapse" id="sideMenuBtn">
-                  <ul className="row nav nav-tabs me-auto mb-2 mb-lg-0">
-                    <li className="nav-item col-12 gap-2">
-                      <Link class="nav-link active" aria-current="page" to="/dashboard/#ocupation">
-                        User Details
-                      </Link>
-                    </li>
-                    <li className="nav-item col-12 gap-2">
-                      <Link
-                        class="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="donationList"
-                        to="/dashboard/#donationList"
-                      >
-                        Donation List
-                      </Link>
-                    </li>
-                    <li className="nav-item col-12 gap-2">
-                      <Link
-                        class="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="addDonation"
-                        to="/dashboard/#addDonation"
-                      >
-                        Add Donations
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-          </div>
-          <div className="col-md-8">
-            <div className="collapse" id="ocupation">
-              <div className="card card-body">
-                <h2>Your ocupation is: {`${ocupation}` || 'No ocupation found'}</h2>
-                <form onSubmit={updateOcupation}>
-                  <input
-                    type="text"
-                    placeholder="Ocupation"
-                    value={tmpOcupation}
-                    onChange={(e) => {
-                      return setTmpOcupation(e.target.value);
-                    }}
-                  />
-                  <input type="submit" value="Update Ocupation" />
-                </form>
-              </div>
-            </div>
-            <div className="collapse" id="donationList">
-              <div className="card card-body">
-                <h1>This is Donation List Area</h1>
-              </div>
-            </div>
-            <div className="collapse" id="addDonation">
-              <div className="card card-body">
-                <h2>This is Add Donations Area</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import AllDonationDetails from './AllDonationDetails';

@@ -1,11 +1,13 @@
+/* eslint-disable import/no-cycle */
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Sidebar from '../../../components/Sidebar/Sidebar';
+// import { UserContext } from '../../../App';
 
 const Donate = () => {
-  const [loggedUser, setLoggedUser] = useState({});
+  const [loggedUser, setLoggedUser] = useState('');
 
   // form validation rules for yup
   const paymentValidationSchema = Yup.object().shape({
@@ -40,7 +42,7 @@ const Donate = () => {
       });
       const data = await req.json();
       if (data.status === 'ok') {
-        setLoggedUser(data.user);
+        setLoggedUser(data.userInfo);
       } else {
         console.log(data.message);
       }
@@ -95,11 +97,11 @@ const Donate = () => {
         </div>
         <div className="col py-3" id="profile">
           <div>
-            <h1>Hi, {loggedUser.lastName}! </h1>
+            <h1>Hi, {loggedUser?.lastName}! </h1>
             <p>You are so great! you are going to help on cause.</p>
           </div>
-          <div className="card card-body mt-4 me-auto">
-            <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="card card-body mt-4 me-md-5 me-auto">
+            <form onSubmit={handleSubmit(onSubmit)} className="row g-4">
               <div className="col-12 position-relative">
                 <input
                   className={`form-control ${errors.email ? 'is-invalid' : ''}`}

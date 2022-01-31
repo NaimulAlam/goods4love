@@ -1,10 +1,20 @@
-import React from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserInfoContext } from '../../App';
 
 const Navbar = () => {
+  const [userInfo, setUserInfo] = useContext(UserInfoContext);
+  console.log('nav', userInfo);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUserInfo(null);
+  };
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg py-3 navbar-light">
+      <nav className="navbar navbar-expand-lg py-3 fixed-top bg-secondary navbar-light">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -43,9 +53,15 @@ const Navbar = () => {
                 </a>
               </li>
             </ul>
-            <Link className="btn btn-outline-warning me-lg-5" to="/login">
-              Login
-            </Link>
+            {userInfo?.email ? (
+              <Link className="btn btn-outline-warning me-lg-5" onClick={handleLogout} to="/">
+                Sign out
+              </Link>
+            ) : (
+              <Link className="btn btn-outline-warning me-lg-5" to="/login">
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </nav>

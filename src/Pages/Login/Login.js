@@ -1,12 +1,17 @@
-import React from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Navbar from '../../components/Navbar/Navbar';
 import './Login.css';
+// eslint-disable-next-line import/no-cycle
+import { UserContext } from '../../App';
 
 const Login = () => {
+  const [isLoggedIn, setIsLoggedIn] = useContext(UserContext);
+
   const navigate = useNavigate();
   const loginSchema = Yup.object().shape({
     email: Yup.string()
@@ -28,7 +33,7 @@ const Login = () => {
 
   // login api call
   const onSubmit = async (submit) => {
-    console.log(submit);
+    // console.log(submit);
     const url = 'https://goods4love.herokuapp.com/api/login';
     const response = await fetch(url, {
       method: 'POST',
@@ -36,15 +41,25 @@ const Login = () => {
       body: JSON.stringify(submit),
     });
     const data = await response.json();
-    if (data.user) {
-      localStorage.setItem('token', data.user);
+    if (data.userToken) {
+      localStorage.setItem('token', data.userToken);
       navigate('/dashboard');
+      setIsLoggedIn(true);
     } else {
-      console.log('error');
+      // console.log('error');
       alert('Sign In Failed! Check your email and password');
     }
   };
   console.log(errors);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      setIsLoggedIn(true);
+      window.location.reload();
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [isLoggedIn, setIsLoggedIn]);
 
   return (
     <div>
