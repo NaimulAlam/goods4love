@@ -10,6 +10,7 @@ const bcrypt = require('bcryptjs');
 // const { ObjectId } = require('mongodb');
 const Donations = require('./models/donations.model');
 const User = require('./models/user.model');
+const Admin = require('./models/admin.model');
 
 // const { MongoClient } = require('mongodb');
 // const fileUpload = require('express-fileupload');
@@ -36,7 +37,7 @@ async function verifyToken(req, res, next) {
 
             return res.json({ status: 'ok', LoggedUser });
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             return res.json({ status: 'error', message: 'Invalid User' });
         }
     }
@@ -45,6 +46,11 @@ async function verifyToken(req, res, next) {
 
 async function run() {
     try {
+        // Main route
+        app.get('/', (req, res) => {
+            res.send('Hello! form Goods4Love');
+        });
+
         // registration route api
         app.post('/api/register', async (req, res) => {
             console.log(req.body);
@@ -62,7 +68,7 @@ async function run() {
                 });
                 return res.json({ status: 'ok', message: 'Sign Up Successfull' });
             } catch (err) {
-                console.error(err);
+                // console.error(err);
                 return res.json({ status: 'error', message: 'Duplicate Email' });
             }
         });
@@ -73,34 +79,34 @@ async function run() {
                 const users = await User.find().all('users-data', []);
                 return res.json({ status: 'ok', users });
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 return res.json({ status: 'error', message: err });
             }
         });
 
         // Login route api
         app.post('/api/login', async (req, res) => {
-            const user = await User.findOne({
+            const userLogin = await User.findOne({
                 email: req.body.email,
             });
 
-            if (!user) {
+            if (!userLogin) {
                 return res.json({ status: 'error', error: 'Invalid Login' });
             }
-            const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+            const isPasswordValid = await bcrypt.compare(req.body.password, userLogin.password);
 
             if (isPasswordValid) {
                 const token = jwt.sign(
                     {
-                        name: user.name,
-                        email: user.email,
+                        name: userLogin.name,
+                        email: userLogin.email,
                     },
                     'secret123'
                 );
 
-                return res.json({ status: 'ok', user: token });
+                return res.json({ status: 'ok', userToken: token });
             }
-            return res.json({ status: 'ok', user: false });
+            return res.json({ status: 'error', user: false });
         });
 
         // loggedIn user information mongoose
@@ -110,11 +116,11 @@ async function run() {
             try {
                 const decoded = jwt.verify(token, 'secret123');
                 const { email } = decoded;
-                const user = await User.findOne({ email });
-                console.log(user);
-                return res.json({ status: 'ok', user });
+                const userInfo = await User.findOne({ email });
+                // console.log(userInfo);
+                return res.json({ status: 'ok', userInfo });
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 return res.json({ status: 'error', message: 'Invalid User' });
             }
         });
@@ -139,16 +145,16 @@ async function run() {
                     }
                 );
 
-                return res.json({ status: 'ok', message: 'Ocupation Updated' });
+                return res.json({ status: 'ok', message: 'User Info Updated' });
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 return res.json({ status: 'error', message: 'Invalid Update' });
             }
         });
 
         // donation info route mongoose
         app.post('/api/donate', async (req, res) => {
-            console.log(req.body);
+            // console.log(req.body);
             try {
                 await Donations.create({
                     email: req.body.email,
@@ -163,10 +169,10 @@ async function run() {
 
                 return res.json({
                     status: 'ok',
-                    message: 'Donation Successfull, Thank you for your support :)',
+                    message: 'Donation Successfull. Thank you for your support.',
                 });
             } catch (err) {
-                console.error(err);
+                // console.error(err);
                 return res.json({ status: 'error', message: 'Plese check your credentials' });
             }
         });
@@ -188,9 +194,9 @@ async function run() {
             try {
                 const decoded = jwt.verify(token, 'secret123');
                 const { email } = decoded;
-                const DonationListUser = await User.findOne({ email });
+                const findUser = await User.findOne({ email });
                 // console.log(DonationListUser);
-                const userId = DonationListUser._id.toString();
+                const userId = findUser._id.toString();
                 if (!userId) {
                     return res.json({ status: 'error', message: 'user not found' });
                 }
@@ -202,13 +208,40 @@ async function run() {
                 // console.log(userDonations);
                 return res.json({ status: 'ok', userDonations });
             } catch {
-                return res.json({ status: 'error', message: 'error catch' });
+                return res.json({ status: 'error', message: 'error' });
             }
         });
 
-        // Main route
-        app.get('/', (req, res) => {
-            res.send('Hello! form Goods4Love');
+        // add Admin route mongoose
+        app.post('/api/addAdmin', async (req, res) => {
+            console.log(req.body);
+            try {
+                await Admin.create({
+                    adminEmail: req.body.adminEmail,
+                    userEmail: req.body.userEmail,
+                });
+
+                return res.json({
+                    status: 'ok',
+                    message: 'Admin Added Successfully',
+                });
+            } catch (err) {
+                console.error(err);
+                return res.json({ status: 'error', message: 'Plese add Admin credentials' });
+            }
+        });
+
+        // get admin route mongoose
+        app.post('/api/isAdmin', async (req, res) => {
+            try {
+                const findAdmin = await Admin.findOne({ adminEmail: req.body.email });
+                if (!findAdmin) {
+                    return res.json({ status: 'error', message: 'Admin not Fount' });
+                }
+                return res.json({ status: 'ok', message: 'Admin found' });
+            } catch {
+                return res.json({ status: 'error', message: 'Error! Admin not found' });
+            }
         });
     } finally {
         app.listen(port, () => {
