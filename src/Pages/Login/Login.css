@@ -1,7 +1,9 @@
 .loginForm {
   margin: auto;
-  width: 40%;
-  background-color: rgb(255, 255, 255);
+  width: 45%;
+  box-sizing: border-box;
+  border: 4px solid rgb(111, 183, 243);
+  border-radius: 10px;
 }
 
 @media (max-width: 768px) {

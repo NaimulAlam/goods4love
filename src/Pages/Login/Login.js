@@ -70,8 +70,7 @@ const Login = () => {
         <Link to="/" className="navbar-brand ms-lg-5">
           <img src={g4lLogo} alt="" />
         </Link>
-        <form onSubmit={handleSubmit(onSubmit)} className="formDiv row g-3 my-5 px-md-5">
-          {/* <form className="loginForm my-4 pt-5"> */}
+        <form onSubmit={handleSubmit(onSubmit)} className="loginForm row g-3 my-5 px-md-5">
           <div className="card-header text-center">
             <h2>Login</h2>
           </div>

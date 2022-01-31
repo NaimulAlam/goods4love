@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg py-3 fixed-top navbar-light">
+      <nav className="navbar navbar-expand-lg fixed-top navbar-light">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -28,8 +28,8 @@ const Navbar = () => {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navbarMenu">
-            <a href="/#Home" className="navbar-brand ms-lg-5">
+          <div className="collapse navbar-collapse mt-3" id="navbarMenu">
+            <a href="/#Home" className="navbar-brand ms-lg-5 ">
               <img src={g4lLogo} alt="" width="40" height="40" className="d-inline-block align-top" />
               <span className="mx-2 fs-3">Goods4Love</span>
             </a>
@@ -57,7 +57,7 @@ const Navbar = () => {
               </li>
             </ul>
             {userInfo?.email ? (
-              <Link className="btn btn-outline-warning me-lg-5" onClick={handleLogout} to="/">
+              <Link className="btn btn-outline-danger me-lg-5" onClick={handleLogout} to="/">
                 Sign out
               </Link>
             ) : (

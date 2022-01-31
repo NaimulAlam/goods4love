@@ -82,9 +82,9 @@ const RegistrationForm = () => {
   return (
     <div>
       <Navbar />
-      <div datatype="form" id="SignUp" className="container my-3 px-lg-5">
-        <h3 className="text-center py-3"> Create An Acount </h3>
+      <div datatype="form" id="SignUp" className="container my-5 pt-5">
         <form onSubmit={handleSubmit(onSubmit)} className="formDiv row g-3 px-md-5">
+          <h3 className="text-center py-3"> Create An Acount </h3>
           <div className="col-12 position-relative">
             <input
               className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
@@ -183,7 +183,7 @@ const RegistrationForm = () => {
               Submit form
             </button>
             <button
-              className="btn btn-danger float-end"
+              className="btn btn-danger my-2 my-md-0 mx-3 mx-md-0 float-end"
               type="button"
               onClick={() => {
                 reset();
