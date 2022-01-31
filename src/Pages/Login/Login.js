@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import './Login.css';
 // eslint-disable-next-line import/no-cycle
 import { UserContext } from '../../App';
+import g4lLogo from '../../Assests/logo-g4l.png';
 
 const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useContext(UserContext);
@@ -64,11 +65,12 @@ const Login = () => {
   return (
     <div>
       <Navbar />
-      <div id="SignIn" className="container-fluid text-center">
-        <h1 className="m-4">Goods4Love</h1>
-        <h2 style={{ color: 'red' }}>LOGO</h2>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="formDiv row g-3 my-4 px-md-5">
+      <div id="SignIn" className="container-fluid text-center mt-5 pt-5">
+        <h1 className="m-4 fw-bolder">Goods4Love</h1>
+        <Link to="/" className="navbar-brand ms-lg-5">
+          <img src={g4lLogo} alt="" />
+        </Link>
+        <form onSubmit={handleSubmit(onSubmit)} className="formDiv row g-3 my-5 px-md-5">
           {/* <form className="loginForm my-4 pt-5"> */}
           <div className="card-header text-center">
             <h2>Login</h2>

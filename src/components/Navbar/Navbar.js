@@ -2,6 +2,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserInfoContext } from '../../App';
+import g4lLogo from '../../Assests/logo-g4l.png';
 
 const Navbar = () => {
   const [userInfo, setUserInfo] = useContext(UserInfoContext);
@@ -14,7 +15,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg py-3 fixed-top bg-secondary navbar-light">
+      <nav className="navbar navbar-expand-lg py-3 fixed-top navbar-light">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -28,9 +29,11 @@ const Navbar = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarMenu">
-            <Link className="navbar-brand ms-lg-5" to="/">
-              Goods4Love
+            <Link to="/" className="navbar-brand ms-lg-5">
+              <img src={g4lLogo} alt="" />
+              <span className="mx-2">Goods4Love</span>
             </Link>
+
             <ul className="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/">
