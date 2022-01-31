@@ -1,8 +1,18 @@
-import React from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import userIcon from '../../Assests/RWHeart.png';
+import { UserInfoContext } from '../../App';
 
 const UserSidebar = () => {
+  const [userInfo, setUserInfo] = useContext(UserInfoContext);
+  console.log('nav', userInfo);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUserInfo(null);
+  };
+
   return (
     <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
       <Link to="/" className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-danger text-decoration-none">
@@ -56,13 +66,7 @@ const UserSidebar = () => {
               <hr className="dropdown-divider" />
             </li>
             <li>
-              <Link
-                onClick={() => {
-                  localStorage.removeItem('token');
-                }}
-                className="dropdown-item"
-                to="/"
-              >
+              <Link className="dropdown-item" onClick={handleLogout} to="/">
                 Sign out
               </Link>
             </li>
