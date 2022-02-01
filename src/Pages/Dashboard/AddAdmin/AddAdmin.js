@@ -9,7 +9,7 @@ import { UserInfoContext } from '../../../App';
 const AddAdmin = () => {
   const [userInfo] = useContext(UserInfoContext);
 
-  console.log('userContext', userInfo);
+  console.log('userContext Add Admin', userInfo);
   // form validation rules for yup
   const AdminEmailValidation = Yup.object().shape({
     adminEmail: Yup.string()
@@ -31,7 +31,7 @@ const AddAdmin = () => {
   const onSubmit = (submit) => {
     const AdminData = {
       ...submit,
-      userEmail: userInfo.email,
+      user: userInfo.email,
     };
     const url = 'https://goods4love.herokuapp.com/api/addAdmin';
     fetch(url, {
@@ -44,7 +44,7 @@ const AddAdmin = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        console.log('AddAdmin resdata', data);
         if (data.status === 'ok') {
           reset();
           alert('Admin Added Successfully');

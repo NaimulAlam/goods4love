@@ -6,7 +6,7 @@ import g4lLogo from '../../Assests/logo-g4l.png';
 
 const Navbar = () => {
   const [userInfo, setUserInfo] = useContext(UserInfoContext);
-  console.log('nav', userInfo);
+  // console.log('nav', userInfo);
 
   const handleLogout = () => {
     localStorage.removeItem('token');

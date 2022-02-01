@@ -6,8 +6,8 @@ import { UserInfoContext } from '../../App';
 import g4lLogo from '../../Assests/logo-g4l.png';
 
 const AdminSidebar = () => {
-  const [userInfo, setUserInfo] = useContext(UserInfoContext);
-  console.log('nav', userInfo);
+  const [setUserInfo] = useContext(UserInfoContext);
+  // console.log('nav', userInfo);
 
   const handleLogout = () => {
     localStorage.removeItem('token');

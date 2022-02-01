@@ -67,7 +67,7 @@ const Donate = () => {
       body: JSON.stringify(donationData),
     })
       .then((res) => {
-        console.log('res', res);
+        // console.log('res', res);
         return res.json();
       })
       .then((data) => {

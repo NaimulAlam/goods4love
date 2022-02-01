@@ -20,8 +20,7 @@ export default function UseAuth() {
       }
     }
     LoggedUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setAuth]);
 
   return auth;
 }

@@ -56,9 +56,10 @@ const Login = () => {
     if (isLoggedIn) {
       setIsLoggedIn(true);
       navigate('/dashboard');
-      // window.location.reload();
+      window.location.reload();
     } else {
       setIsLoggedIn(false);
+      navigate('/login');
     }
   }, [isLoggedIn, setIsLoggedIn, navigate]);
 
