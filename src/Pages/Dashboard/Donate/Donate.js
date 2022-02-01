@@ -10,7 +10,7 @@ const Donate = () => {
   const [loggedUser, setLoggedUser] = useState('');
 
   // form validation rules for yup
-  const paymentValidationSchema = Yup.object().shape({
+  const donateValidationSchema = Yup.object().shape({
     email: Yup.string()
       .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)
       .required('Email is required')
@@ -23,7 +23,7 @@ const Donate = () => {
     amount: Yup.number().required('Please enter amount'),
   });
 
-  const formOptions = { resolver: yupResolver(paymentValidationSchema) };
+  const formOptions = { resolver: yupResolver(donateValidationSchema) };
 
   const {
     register,

@@ -11,7 +11,7 @@ const AllDonations = () => {
   useEffect(() => {
     const url = 'https://goods4love.herokuapp.com/api/alldonations';
 
-    const GetDonations = async () => {
+    const GetAllDonations = async () => {
       try {
         const res = await fetch(url, {
           headers: {
@@ -19,7 +19,7 @@ const AllDonations = () => {
           },
         });
         const data = await res.json();
-        console.log('data', data.alldonations);
+        console.log('allDonation', data.alldonations);
         setAllDonations(data.alldonations);
         setIsLoading(false);
       } catch (err) {
@@ -28,7 +28,7 @@ const AllDonations = () => {
         console.log('finally');
       }
     };
-    GetDonations();
+    GetAllDonations();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
