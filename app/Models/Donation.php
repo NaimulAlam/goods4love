@@ -18,7 +18,7 @@ class Donation extends Model
         'u_id',
         'email',
         'amount',
-        'phoneNumber',
+        'contactNumber',
         'ad_Id',
         
     ];

@@ -37,15 +37,12 @@ Route::group(
         Route::get('allDonationsList',[DonationController::class, 'list']);
         Route::post('addAdmin',[AdminController::class, 'addAdmin']);
         Route::post('isAdmin',[AdminController::class, 'isAdmin']);
+        Route::post('addDonation',[AddDonationController::class, 'addDonation']);
     }
 
 );
 
-//Route::get('userDonationsList',[DonationController::class, 'list']);
-//Route::post('donation',[DonationController::class, 'donation']);
-Route::post('addDonation',[AddDonationController::class, 'addDonation']);
-//Route::post('addDonationList',[AddDonationController::class, 'list']);
-//Route::post('makeAdmin',[AdminController::class, 'makeAdmin']);
+
 Route::post('newReview',[ReviewController::class, 'newReview']);
 Route::post('newAuction',[AuctionController::class, 'newAuction']);
 Route::post('auction',[AuctionController::class, 'updateAuction']);

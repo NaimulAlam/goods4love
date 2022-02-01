@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-    function newReview(Request $req)
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
+
+    public function addReview(Request $req)
     {
         $review = new Review;
 

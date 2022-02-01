@@ -17,16 +17,16 @@ class AdminController extends Controller
     public function addAdmin(Request $req)
     {
         $validator = Validator::make($req->all(),[
-            'email' => ['required', 'string', 'email'],
+            'adminEmail' => ['required', 'string', 'email'],
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
         
-        if($validator->validated()){
-            $user = auth()->user();
-            $userId = $user->where('email', $user->email)->value('id');
+        
+            $email = $validator->validated();
+            $userId = User::where('email', $email)->value('id');
             if(Admin::where('u_id', $userId)->first())
             {
                 return response()->json([
@@ -41,7 +41,7 @@ class AdminController extends Controller
                 "status" => 'ok',
                 "message" => 'User successfully updated'
             ]);
-        }
+    
         
     
     }

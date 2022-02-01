@@ -8,7 +8,7 @@ use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class UserController extends Controller
 {
@@ -109,6 +109,7 @@ class UserController extends Controller
 
     protected function createNewToken($token)
     {
+        
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
@@ -116,5 +117,7 @@ class UserController extends Controller
             'user' => auth()->user()
         ]);
     }
+   
+
     
 }
