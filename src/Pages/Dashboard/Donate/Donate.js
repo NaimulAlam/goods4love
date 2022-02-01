@@ -54,6 +54,7 @@ const Donate = () => {
   const onSubmit = (submit) => {
     const donationData = {
       ...submit,
+      oldEmail: loggedUser.email,
       firstName: loggedUser.firstName,
       lastName: loggedUser.lastName,
       city: loggedUser.city,
@@ -87,7 +88,7 @@ const Donate = () => {
     // alert(`SUCCESS!! :-)\n\n${JSON.stringify(data, null, 4)}`);
   };
   console.log(errors);
-  // console.log(loggedUser);
+  // console.log('loggedUser', loggedUser);
 
   return (
     <div className="container-fluid">
