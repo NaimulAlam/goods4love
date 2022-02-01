@@ -45,6 +45,7 @@ const Login = () => {
       localStorage.setItem('token', data.userToken);
       setIsLoggedIn(true);
       navigate('/dashboard');
+      window.location.reload();
     } else {
       // console.log('error');
       alert('Sign In Failed! Check your email and password');

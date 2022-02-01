@@ -1,3 +1,19 @@
+.ServiceImage {
+  width: 400px;
+  height: 400px;
+  border: 1px solid rgb(212, 209, 209);
+  object-fit: cover;
+}
+
+/* Responsive according to screens */
+@media (max-width: 768px) {
+  .serviceImage {
+    width: 320px;
+    height: 200px;
+    /* object-fit: cover; */
+  }
+}
+/* 
 .serviceDiv {
   margin-top: 100px;
   margin-bottom: 50px;
@@ -47,12 +63,6 @@
 .card.card-just-text .content {
   padding: 50px;
   text-align: center;
-}
-
-.ServiceImage {
-  width: 300px;
-  height: 200px;
-  object-fit: cover;
 }
 
 .card .content {
@@ -106,7 +116,7 @@ a:focus {
 }
 
 /*======== COLORS ===========*/
-.card[data-color='blue'] {
+/* .card[data-color='blue'] {
   background: #b8d8d8;
 }
 .card[data-color='blue'] .description {
@@ -131,18 +141,4 @@ a:focus {
 }
 .card[data-color='purple'] .category {
   color: #5a283d;
-}
-
-/* Responsive according to screens */
-@media (max-width: 768px) {
-  .card-big-shadow {
-    margin-left: 20px;
-    max-width: 350px;
-    position: relative;
-  }
-  /* .ServiceImage {
-    width: 320px;
-    height: 200px;
-    object-fit: cover;
-  } */
-}
+}  */

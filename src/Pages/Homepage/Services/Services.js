@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import './Services.css';
+import './Services.css';
 import RWHeart from '../../../Assests/RWHeart.png';
+import SaveEarth from '../../../Assests/Save-Earth.png';
 
 const Offers = () => {
   return (
@@ -12,12 +13,12 @@ const Offers = () => {
       </div>
       <div className="row row-cols-1 row-cols-md-3 mb-3 text-center py-5">
         <div className="col">
-          <div className="card mb-4 rounded-3 shadow-sm">
+          <div className="card h-100 mb-4 rounded-3 shadow-sm border-success">
             <div className="card-header text-white bg-success py-3">
               <h4 className="my-0 fw-normal">Save The Earth</h4>
             </div>
             <div>
-              <img src={RWHeart} className="img-thumbnail" alt="..." />
+              <img src={SaveEarth} className="img-thumbnail ServiceImage" alt="..." />
             </div>
             <div className="card-body">
               <h1 className="card-title pricing-card-title">
@@ -33,12 +34,12 @@ const Offers = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card mb-4 rounded-3 shadow-sm">
+          <div className="card h-100 mb-4 rounded-3 shadow-sm border-danger">
             <div className="card-header text-white bg-danger py-3">
               <h4 className="my-0 fw-normal">Become A Valunteer</h4>
             </div>
             <div>
-              <img src={RWHeart} className="img-thumbnail" alt="..." />
+              <img src={RWHeart} className="img-thumbnail ServiceImage" alt="..." />
             </div>
             <div className="card-body">
               <h1 className="card-title pricing-card-title">
@@ -54,12 +55,12 @@ const Offers = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card mb-4 rounded-3 shadow-sm border-primary">
+          <div className="card h-100 mb-4 rounded-3 shadow-sm border-primary">
             <div className="card-header py-3 text-white bg-primary border-primary">
               <h4 className="my-0 fw-normal">Childern Fund</h4>
             </div>
             <div>
-              <img src={RWHeart} className="img-thumbnail" alt="..." />
+              <img src={RWHeart} className="img-thumbnail ServiceImage" alt="..." />
             </div>
             <div className="card-body">
               <h1 className="card-title pricing-card-title">

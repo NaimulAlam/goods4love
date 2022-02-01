@@ -23,9 +23,9 @@ const UserSidebar = () => {
 
       <ul className="nav nav-tabs flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="sidebar">
         <li className="nav-item">
-          <Link to="/" className="nav-link px-0 align-middle">
+          <a href="/#Home" className="nav-link px-0 align-middle">
             <i className="fs-4 bi-house" /> <span className="ms-1 d-none d-sm-inline">Home</span>
-          </Link>
+          </a>
         </li>
         <li className="nav-item">
           <Link to="/dashboard" className="nav-link px-0 align-middle">
