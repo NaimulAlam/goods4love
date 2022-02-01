@@ -6,12 +6,11 @@ const Donations = new mongoose.Schema(
         contactNumber: { type: String, required: true },
         cause: { type: String, required: true },
         amount: { type: String, required: true },
-        uid: { type: String, required: true },
         oldEmail: { type: String, required: true },
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
         city: { type: String, required: true },
-        zipCode: { type: String, required: true },
+        uid: { type: String, required: true },
     },
     { collection: 'donations' }
 );
