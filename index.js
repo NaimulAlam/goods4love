@@ -318,6 +318,30 @@ async function run() {
             }
         });
 
+        // get all donations of a user route mongoose
+        app.get('/api/userDonations', async (req, res) => {
+            const token = req.headers['x-access-token'];
+            try {
+                const decoded = jwt.verify(token, 'secret123');
+                const { email } = decoded;
+                const findUser = await User.findOne({ email });
+                // console.log(DonationListUser);
+                const userId = findUser._id.toString();
+                if (!userId) {
+                    return res.json({ status: 'error', message: 'user not found' });
+                }
+                // console.log(userId);
+                const userDonations = await Donations.find({ uid: userId }).all(
+                    'userDonations',
+                    []
+                );
+                // console.log(userDonations);
+                return res.json({ status: 'ok', userDonations });
+            } catch {
+                return res.json({ status: 'error', message: 'error' });
+            }
+        });
+
         // add Admin route mongoose
         app.post('/api/addAdmin', async (req, res) => {
             console.log(req.body);
