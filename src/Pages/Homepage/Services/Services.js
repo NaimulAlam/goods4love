@@ -45,7 +45,7 @@ const Offers = () => {
                 $10<small className="text-muted fw-light">/or any amount</small>
               </h1>
               <p>You can donate as small as 10 PLN to any amount</p>
-              <Link to="/registration">
+              <Link to="/profile">
                 <button type="button" className="w-100 btn btn-lg btn-outline-success">
                   Get Started
                 </button>

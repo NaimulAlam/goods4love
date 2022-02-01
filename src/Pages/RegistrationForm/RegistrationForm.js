@@ -1,13 +1,16 @@
 /* eslint-disable import/no-cycle */
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Navbar from '../../components/Navbar/Navbar';
 import './RegistrationForm.css';
+import { UserContext } from '../../App';
 
 const RegistrationForm = () => {
+  const [isLoggedIn] = useContext(UserContext);
+
   const navigate = useNavigate();
   // form validation rules for yup
   const validationSchema = Yup.object().shape({
@@ -78,6 +81,14 @@ const RegistrationForm = () => {
     // alert(`SUCCESS!! :-)\n\n${JSON.stringify(data, null, 4)}`);
   };
   console.log(errors);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    } else {
+      navigate('/registration');
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div>

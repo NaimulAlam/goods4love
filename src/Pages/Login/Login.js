@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import Navbar from '../../components/Navbar/Navbar';
 import './Login.css';
 // eslint-disable-next-line import/no-cycle
 import { UserContext } from '../../App';
@@ -44,8 +43,8 @@ const Login = () => {
     const data = await response.json();
     if (data.userToken) {
       localStorage.setItem('token', data.userToken);
-      navigate('/dashboard');
       setIsLoggedIn(true);
+      navigate('/dashboard');
     } else {
       // console.log('error');
       alert('Sign In Failed! Check your email and password');
@@ -56,22 +55,22 @@ const Login = () => {
   useEffect(() => {
     if (isLoggedIn) {
       setIsLoggedIn(true);
-      window.location.reload();
+      navigate('/dashboard');
+      // window.location.reload();
     } else {
       setIsLoggedIn(false);
     }
-  }, [isLoggedIn, setIsLoggedIn]);
+  }, [isLoggedIn, setIsLoggedIn, navigate]);
 
   return (
     <div>
-      <Navbar />
       <div id="SignIn" className="container-fluid text-center mt-5 pt-5">
         <h1 className="m-4 fw-bolder">Goods4Love</h1>
         <Link to="/" className="navbar-brand ms-lg-5">
           <img src={g4lLogo} alt="" />
         </Link>
         <form onSubmit={handleSubmit(onSubmit)} className="loginForm row g-3 my-5 px-md-5">
-          <div className="card-header text-center">
+          <div className="text-center mt-5">
             <h2>Login</h2>
           </div>
           <div className="col-12 position-relative">
