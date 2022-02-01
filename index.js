@@ -11,6 +11,9 @@ const bcrypt = require('bcryptjs');
 const Donations = require('./models/donations.model');
 const User = require('./models/user.model');
 const Admin = require('./models/admin.model');
+const AddDonation = require('./models/addDonation.model');
+const AddReview = require('./models/addReview.model');
+const Bidding = require('./models/bidding.model');
 
 // const { MongoClient } = require('mongodb');
 // const fileUpload = require('express-fileupload');
@@ -177,11 +180,116 @@ async function run() {
             }
         });
 
-        // get all donations route mongoose
-        app.get('/api/alldonations', verifyToken, async (req, res) => {
+        // Add Review info route mongoose
+        //
+        app.post('/api/AddReview', async (req, res) => {
+            // console.log(req.body);
             try {
-                const alldonations = await Donations.find().all('alldonations', []);
-                return res.json({ status: 'ok', alldonations });
+                await AddReview.create({
+                    review: req.body.review,
+                    uid: req.body.uid,
+                    email: req.body.adminEmail,
+                });
+
+                return res.json({
+                    status: 'ok',
+                    message: 'Review Added Successfull',
+                });
+            } catch (err) {
+                // console.error(err);
+                return res.json({ status: 'error', message: 'Review Addition Failed' });
+            }
+        });
+        // Add Bidding info route mongoose
+        //
+        app.post('/api/addBidding', async (req, res) => {
+            // console.log(req.body);
+            try {
+                await Bidding.create({
+                    biddingName: req.body.review,
+                    biddingDescription: req.body.biddingDescription,
+                    initialBid: req.body.initialBid,
+                    email: req.body.adminEmail,
+                });
+
+                return res.json({
+                    status: 'ok',
+                    message: 'Review Added Successfull',
+                });
+            } catch (err) {
+                // console.error(err);
+                return res.json({ status: 'error', message: 'Review Addition Failed' });
+            }
+        });
+
+        // update Bid depends on new Entry mongoose
+        // //
+        app.post('/api/Bidding/:id/update', verifyToken, async (req, res) => {
+            const token = req.headers['x-access-token'];
+            try {
+                const { id } = req.params;
+                const findBidding = await Bidding.findOne(id);
+                if (!findBidding) {
+                    return res.json({ status: 'error', message: 'Invalid Bidding' });
+                }
+                console.log(findBidding);
+
+                const decoded = jwt.verify(token, 'secret123');
+                const { email } = decoded;
+                const findUser = await User.findOne({ email });
+                console.log(findUser);
+                const userId = findUser._id.toString();
+
+                if (!userId) {
+                    return res.json({ status: 'error', message: 'Invalid User' });
+                }
+
+                await Bidding.updateOne(
+                    { id },
+                    {
+                        $set: {
+                            biddingAmount: req.body.biddingAmount,
+                            bidderEmail: req.body.bidderEmail,
+                            uid: req.body.uid,
+                        },
+                    }
+                );
+
+                return res.json({ status: 'ok', message: 'User Info Updated' });
+            } catch (err) {
+                // console.log(err);
+                return res.json({ status: 'error', message: 'Invalid Update' });
+            }
+        });
+
+        // Add donation info route mongoose
+        //
+        app.post('/api/AddDonation', async (req, res) => {
+            // console.log(req.body);
+            try {
+                await AddDonation.create({
+                    donationName: req.body.donationName,
+                    description: req.body.description,
+                    uid: req.body.uid,
+                    adminEmail: req.body.adminEmail,
+                });
+
+                return res.json({
+                    status: 'ok',
+                    message: 'Donation Shema Added Successfull',
+                });
+            } catch (err) {
+                // console.error(err);
+                return res.json({ status: 'error', message: 'Donation Creation Failed' });
+            }
+        });
+
+        // get added donations route mongoose
+        //
+        app.get('/api/donations', verifyToken, async (req, res) => {
+            try {
+                const donations = await AddDonation.find().all('donations', []);
+                return res.json({ status: 'ok', donations });
             } catch (err) {
                 console.log(err);
                 return res.json({ status: 'error', message: err });
@@ -218,7 +326,7 @@ async function run() {
             try {
                 await Admin.create({
                     adminEmail: req.body.adminEmail,
-                    userEmail: req.body.userEmail,
+                    user: req.body.user,
                 });
 
                 return res.json({
