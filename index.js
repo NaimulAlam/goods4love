@@ -156,7 +156,7 @@ async function run() {
         });
 
         // donation info route mongoose
-        app.post('/api/donate', async (req, res) => {
+        app.post('/api/donate', verifyToken, async (req, res) => {
             // console.log(req.body);
             try {
                 await Donations.create({
