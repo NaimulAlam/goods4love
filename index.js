@@ -268,15 +268,15 @@ async function run() {
             // console.log(req.body);
             try {
                 await AddDonation.create({
-                    donationName: req.body.donationName,
+                    donationTitle: req.body.donationTitle,
                     description: req.body.description,
-                    uid: req.body.uid,
                     adminEmail: req.body.adminEmail,
                 });
 
+                console.log(res);
                 return res.json({
                     status: 'ok',
-                    message: 'Donation Shema Added Successfull',
+                    message: 'Donation Added Successfull',
                 });
             } catch (err) {
                 // console.error(err);
@@ -284,7 +284,7 @@ async function run() {
             }
         });
 
-        // get added donations route mongoose
+        // get added single donations route mongoose
         //
         app.get('/api/donations', verifyToken, async (req, res) => {
             try {
@@ -297,26 +297,24 @@ async function run() {
         });
 
         // get all donations of a user route mongoose
-        app.get('/api/userDonations', async (req, res) => {
+        app.get('/api/alldonations', verifyToken, async (req, res) => {
             const token = req.headers['x-access-token'];
             try {
                 const decoded = jwt.verify(token, 'secret123');
                 const { email } = decoded;
                 const findUser = await User.findOne({ email });
-                // console.log(DonationListUser);
+                console.log(findUser);
                 const userId = findUser._id.toString();
+
                 if (!userId) {
-                    return res.json({ status: 'error', message: 'user not found' });
+                    return res.json({ status: 'error', message: 'Invalid User' });
                 }
-                // console.log(userId);
-                const userDonations = await Donations.find({ uid: userId }).all(
-                    'userDonations',
-                    []
-                );
-                // console.log(userDonations);
-                return res.json({ status: 'ok', userDonations });
-            } catch {
-                return res.json({ status: 'error', message: 'error' });
+
+                const alldonations = await Donations.find().all('alldonations', []);
+                return res.json({ status: 'ok', alldonations });
+            } catch (err) {
+                // console.log(err);
+                return res.json({ status: 'error', message: err });
             }
         });
 
