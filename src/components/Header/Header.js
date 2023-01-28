@@ -1,11 +1,10 @@
-/* eslint-disable import/no-cycle */
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
-import donateEuro from '../../Assests/donateEuro.jpg';
-import RWHeart from '../../Assests/RWHeart.png';
-import clothDonate from '../../Assests/clothDonation.jpg';
-import './Header.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
+import donateEuro from "../../Assests/donateEuro.jpg";
+import RWHeart from "../../Assests/RWHeart.png";
+import clothDonate from "../../Assests/clothDonation.jpg";
+import "./Header.css";
 
 const Header = () => {
   return (
@@ -14,7 +13,11 @@ const Header = () => {
       <Navbar />
       {/* This is carousel */}
       <div>
-        <div id="carouselExample1" className="carousel slide" data-bs-ride="carousel">
+        <div
+          id="carouselExample1"
+          className="carousel slide"
+          data-bs-ride="carousel"
+        >
           <div className="carousel-indicators">
             <button
               type="button"
@@ -24,8 +27,18 @@ const Header = () => {
               aria-current="true"
               aria-label="Slide 1"
             />
-            <button type="button" data-bs-target="#carouselExample1" data-bs-slide-to="1" aria-label="Slide 2" />
-            <button type="button" data-bs-target="#carouselExample1" data-bs-slide-to="2" aria-label="Slide 3" />
+            <button
+              type="button"
+              data-bs-target="#carouselExample1"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            />
+            <button
+              type="button"
+              data-bs-target="#carouselExample1"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            />
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active ">
@@ -41,22 +54,32 @@ const Header = () => {
                   </div>
                   <div className="col-lg-6">
                     <h1 className="display-5 fw-bold lh-1 mb-3">
-                      COVID-19 has had a drastic effect on all our lives, but has impacted the poor the most.
+                      COVID-19 has had a drastic effect on all our lives, but
+                      has impacted the poor the most.
                     </h1>
                     <p className="lead">
-                      Since the announcement of lockdown, Breadline Africa immediately focused all efforts toward
-                      emergency feeding programmes in poor communities to alleviate hunger. Since Oct 2021, we have
-                      supported 40 projects, 55 communities and provided nearly Half a million meals to people in need!
-                      Currently, we continue to support 12 feeding sites, providing 20,000 meals a week.
+                      Since the announcement of lockdown, Breadline Africa
+                      immediately focused all efforts toward emergency feeding
+                      programmes in poor communities to alleviate hunger. Since
+                      Oct 2021, we have supported 40 projects, 55 communities
+                      and provided nearly Half a million meals to people in
+                      need! Currently, we continue to support 12 feeding sites,
+                      providing 20,000 meals a week.
                     </p>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                      <a href="#Donate">
-                        <button type="button" className="btn btn-primary btn-lg px-4 me-md-2">
+                      <a href="#donate">
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-lg px-4 me-md-2"
+                        >
                           Donate
                         </button>
                       </a>
                       <Link to="/registration">
-                        <button type="button" className="btn btn-outline-secondary btn-lg px-4">
+                        <button
+                          type="button"
+                          className="btn btn-outline-secondary btn-lg px-4"
+                        >
                           Sign Up
                         </button>
                       </Link>
@@ -69,22 +92,32 @@ const Header = () => {
               <div className="container col-xxl-8 px-4 py-5 text-end">
                 <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
                   <div className="col-lg-6">
-                    <h1 className="display-5 fw-bold lh-1 mb-3">Show that You Care Today</h1>
+                    <h1 className="display-5 fw-bold lh-1 mb-3">
+                      Show that You Care Today
+                    </h1>
                     <p className="lead">
-                      “Everybody can be great. Because anybody can serve. You don’t have to have a college degree to
-                      serve. You don’t have to make your subject and your verb agree to serve…. You don’t have to know
-                      the second theory of thermodynamics in physics to serve. You only need a heart full of grace. A
-                      soul generated by love.”
+                      “Everybody can be great. Because anybody can serve. You
+                      don’t have to have a college degree to serve. You don’t
+                      have to make your subject and your verb agree to serve….
+                      You don’t have to know the second theory of thermodynamics
+                      in physics to serve. You only need a heart full of grace.
+                      A soul generated by love.”
                     </p>
                     <p>~Martin Luther King, Jr.</p>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <a href="#Donate">
-                        <button type="button" className="btn btn-primary btn-lg px-4 me-md-2">
+                      <a href="#donate">
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-lg px-4 me-md-2"
+                        >
                           Donate
                         </button>
                       </a>
                       <Link to="/registration">
-                        <button type="button" className="btn btn-outline-secondary btn-lg px-4">
+                        <button
+                          type="button"
+                          className="btn btn-outline-secondary btn-lg px-4"
+                        >
                           Sign Up
                         </button>
                       </Link>
@@ -113,20 +146,28 @@ const Header = () => {
                     />
                   </div>
                   <div className="col-lg-6">
-                    <h1 className="display-5 fw-bold lh-1 mb-3">Show that You Care Today: Donate Some Cloths</h1>
+                    <h1 className="display-5 fw-bold lh-1 mb-3">
+                      Show that You Care Today: Donate Some Cloths
+                    </h1>
                     <p className="lead">
-                      Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one
-                      more time.
+                      Our greatest weakness lies in giving up. The most certain
+                      way to succeed is always to try just one more time.
                     </p>
                     <p>~Thomas A. Edison</p>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                      <a href="#Donate">
-                        <button type="button" className="btn btn-primary btn-lg px-4 me-md-2">
+                      <a href="#donate">
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-lg px-4 me-md-2"
+                        >
                           Donate
                         </button>
                       </a>
                       <Link to="/registration">
-                        <button type="button" className="btn btn-outline-secondary btn-lg px-4">
+                        <button
+                          type="button"
+                          className="btn btn-outline-secondary btn-lg px-4"
+                        >
                           Sign Up
                         </button>
                       </Link>

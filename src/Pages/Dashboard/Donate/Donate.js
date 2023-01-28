@@ -1,26 +1,25 @@
-/* eslint-disable import/no-cycle */
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import Sidebar from '../../../components/Sidebar/Sidebar';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Sidebar from "../../../components/Sidebar/Sidebar";
 // import { UserContext } from '../../../App';
 
 const Donate = () => {
-  const [loggedUser, setLoggedUser] = useState('');
+  const [loggedUser, setLoggedUser] = useState("");
 
   // form validation rules for yup
   const donateValidationSchema = Yup.object().shape({
     email: Yup.string()
       .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)
-      .required('Email is required')
+      .required("Email is required")
       .lowercase(),
     contactNumber: Yup.string()
-      .required('contact number is required')
-      .min(9, 'contact No. must be 9 digits')
-      .max(13, 'contact No. must be 13 digits'),
-    cause: Yup.string().required('Please select a cause'),
-    amount: Yup.number().required('Please enter amount'),
+      .required("contact number is required")
+      .min(9, "contact No. must be 9 digits")
+      .max(13, "contact No. must be 13 digits"),
+    cause: Yup.string().required("Please select a cause"),
+    amount: Yup.number().required("Please enter amount"),
   });
 
   const formOptions = { resolver: yupResolver(donateValidationSchema) };
@@ -33,22 +32,22 @@ const Donate = () => {
   } = useForm(formOptions);
 
   useEffect(() => {
+    const url = "http://localhost:5000/api/userinfo";
     async function LoggedUser() {
-      const url = 'https://goods4love.herokuapp.com/api/userinfo';
       const req = await fetch(url, {
         headers: {
-          'x-access-token': localStorage.getItem('token'),
+          "x-access-token": localStorage.getItem("token"),
         },
       });
       const data = await req.json();
-      if (data.status === 'ok') {
+      if (data.status === "ok") {
         setLoggedUser(data.userInfo);
       } else {
         console.log(data.message);
       }
     }
     LoggedUser();
-  }, []);
+  }, [loggedUser.email]);
 
   // Donations Details Submit api call
   const onSubmit = (submit) => {
@@ -60,29 +59,32 @@ const Donate = () => {
       city: loggedUser.city,
       uid: loggedUser._id,
     };
-    console.log('submit', donationData);
-    const url = 'https://goods4love.herokuapp.com/api/donate';
+    console.log("submit", donationData);
+    const url = "http://localhost:5000/api/donate";
     fetch(url, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-access-token': localStorage.getItem('token') },
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
       body: JSON.stringify(donationData),
     })
-      .then((res) => {
+      .then((res) =>
         // console.log('res', res);
-        return res.json();
-      })
+        res.json()
+      )
       .then((data) => {
         console.log(data);
-        if (data.status === 'ok') {
+        if (data.status === "ok") {
           reset();
-          alert('Donation Successfull! Thank you for your support');
+          alert("Donation Successfull! Thank you for your support");
         } else {
-          alert('Donation Failed! Please try again');
+          alert("Donation Failed! Please try again");
         }
         return data;
       })
       .catch((err) => {
-        console.log('err', err);
+        console.log("err", err);
       });
     // display form data on success
     // alert(`SUCCESS!! :-)\n\n${JSON.stringify(data, null, 4)}`);
@@ -105,29 +107,35 @@ const Donate = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="row g-4">
               <div className="col-12 position-relative">
                 <input
-                  className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                  className={`form-control ${errors.email ? "is-invalid" : ""}`}
                   type="text"
                   name="email"
                   placeholder="Email"
-                  {...register('email')}
+                  {...register("email")}
                 />
-                <div className="invalid-feedback">Please Use Valid Email Address</div>
+                <div className="invalid-feedback">
+                  Please Use Valid Email Address
+                </div>
               </div>
               <div className="col-12 position-relative">
                 <input
-                  className={`form-control ${errors.contactNumber ? 'is-invalid' : ''}`}
+                  className={`form-control ${
+                    errors.contactNumber ? "is-invalid" : ""
+                  }`}
                   type="text"
                   name="contactNumber"
                   placeholder="Contact/ Phone Number"
-                  {...register('contactNumber')}
+                  {...register("contactNumber")}
                 />
-                <div className="invalid-feedback">Please Use Valid Contact Number</div>
+                <div className="invalid-feedback">
+                  Please Use Valid Contact Number
+                </div>
               </div>
               <div className="col-12 position-relative">
                 <select
-                  className={`form-control ${errors.cause ? 'is-invalid' : ''}`}
+                  className={`form-control ${errors.cause ? "is-invalid" : ""}`}
                   name="cause"
-                  {...register('cause')}
+                  {...register("cause")}
                 >
                   <option value="">Select your cause...</option>
                   <option value="Save Children">Save Children</option>
@@ -138,13 +146,17 @@ const Donate = () => {
               </div>
               <div className="col-12 position-relative">
                 <input
-                  className={`form-control ${errors.amount ? 'is-invalid' : ''}`}
+                  className={`form-control ${
+                    errors.amount ? "is-invalid" : ""
+                  }`}
                   type="number"
                   name="amount"
                   placeholder="Amount"
-                  {...register('amount')}
+                  {...register("amount")}
                 />
-                <div className="invalid-feedback">Please enter valid amount</div>
+                <div className="invalid-feedback">
+                  Please enter valid amount
+                </div>
               </div>
               <div className="col-12 position-relative">
                 <input
@@ -154,10 +166,15 @@ const Donate = () => {
                   id="termsAndConditions"
                   required
                 />
-                <label className="form-check-label mx-2" htmlFor="termsAndConditions">
+                <label
+                  className="form-check-label mx-2"
+                  htmlFor="termsAndConditions"
+                >
                   I agree to all terms and conditions
                 </label>
-                <div className="invalid-tooltip">Please agree to the terms and conditions.</div>
+                <div className="invalid-tooltip">
+                  Please agree to the terms and conditions.
+                </div>
               </div>
               <div className="col-12 text-center">
                 <button className="btn btn-primary px-5" type="submit">

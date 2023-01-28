@@ -1,18 +1,21 @@
-/* eslint-disable import/no-cycle */
-import React, { useContext } from 'react';
-import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import Sidebar from '../../../components/Sidebar/Sidebar';
-import { UserInfoContext } from '../../../App';
+import React, { useContext } from "react";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import { UserInfoContext } from "../../../App";
 
 const AddDonation = () => {
   const [userInfo] = useContext(UserInfoContext);
 
   // form validation rules for yup
   const AddDonationSchema = Yup.object().shape({
-    donationTitle: Yup.string().min(5, 'Please add min 5 letter').required('Please add the donation/cause name'),
-    description: Yup.string().min(40, 'Please add min 40 letter').required('Please add description of it'),
+    donationTitle: Yup.string()
+      .min(5, "Please add min 5 letter")
+      .required("Please add the donation/cause name"),
+    description: Yup.string()
+      .min(40, "Please add min 40 letter")
+      .required("Please add description of it"),
   });
 
   const formOptions = { resolver: yupResolver(AddDonationSchema) };
@@ -26,35 +29,35 @@ const AddDonation = () => {
 
   // Donations Details Submit api call
   const onSubmit = (submit) => {
-    console.log('submit', submit);
+    console.log("submit", submit);
     const AddDonationData = {
       ...submit,
       adminEmail: userInfo.email,
     };
-    const url = 'https://goods4love.herokuapp.com/api/addDonation';
+    const url = "http://localhost:5000/api/addDonation";
     fetch(url, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      method: "POST",
+      headers: { "content-type": "application/json" },
       body: JSON.stringify(AddDonationData),
     })
       .then((res) => {
-        console.log('AddDonationData res', res);
+        console.log("AddDonationData res", res);
         return res.json();
       })
       .then((data) => {
-        console.log('AddDonationData resdata', data);
-        if (data.status === 'ok') {
+        console.log("AddDonationData resdata", data);
+        if (data.status === "ok") {
           reset();
-          alert('Donation Data Added Successfully');
+          alert("Donation Data Added Successfully");
         } else {
-          alert('Error!! Donation Data not added');
+          alert("Error!! Donation Data not added");
         }
         return data;
       })
       .catch((err) => {
-        console.log('err', err);
+        console.log("err", err);
       });
-    console.log('AddDonationData', AddDonationData);
+    console.log("AddDonationData", AddDonationData);
   };
 
   return (
@@ -71,23 +74,31 @@ const AddDonation = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="row g-4">
               <div className="col-12 position-relative">
                 <input
-                  className={`form-control ${errors.donationTitle ? 'is-invalid' : ''}`}
+                  className={`form-control ${
+                    errors.donationTitle ? "is-invalid" : ""
+                  }`}
                   type="text"
                   name="donationTitle"
                   placeholder="Donation/Cause Title"
-                  {...register('donationTitle')}
+                  {...register("donationTitle")}
                 />
-                <div className="invalid-feedback">{errors.donationTitle?.message}</div>
+                <div className="invalid-feedback">
+                  {errors.donationTitle?.message}
+                </div>
               </div>
               <div className="col-12 position-relative">
                 <textarea
-                  className={`form-control ${errors.description ? 'is-invalid' : ''}`}
+                  className={`form-control ${
+                    errors.description ? "is-invalid" : ""
+                  }`}
                   type="text"
                   name="description"
                   placeholder="Description"
-                  {...register('description')}
+                  {...register("description")}
                 />
-                <div className="invalid-feedback">{errors.description?.message}</div>
+                <div className="invalid-feedback">
+                  {errors.description?.message}
+                </div>
               </div>
 
               <div className="col-12 position-relative">
@@ -98,10 +109,15 @@ const AddDonation = () => {
                   id="termsAndConditions"
                   required
                 />
-                <label className="form-check-label mx-2" htmlFor="termsAndConditions">
+                <label
+                  className="form-check-label mx-2"
+                  htmlFor="termsAndConditions"
+                >
                   Check Before Submittion
                 </label>
-                <div className="invalid-tooltip">Please! Check Before Submittion</div>
+                <div className="invalid-tooltip">
+                  Please! Check Before Submittion
+                </div>
               </div>
               <div className="col-12 text-center">
                 <button className="btn btn-primary px-5" type="submit">

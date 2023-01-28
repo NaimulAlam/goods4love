@@ -1,7 +1,6 @@
-/* eslint-disable import/no-cycle */
-import React from 'react';
-import Sidebar from '../../../components/Sidebar/Sidebar';
-import './UserDashboard.css';
+import React from "react";
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import "./UserDashboard.css";
 
 const UserDashboard = () => {
   return (
@@ -18,7 +17,9 @@ const UserDashboard = () => {
             </div>
             <div className="tab-pane fade" id="allDonations">
               <h4 className="mt-2">allDonations</h4>
-              <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque.</p>
+              <p>
+                Vestibulum nec erat eu nulla rhoncus fringilla ut non neque.
+              </p>
             </div>
             <div className="tab-pane fade" id="addAdmin">
               <h4 className="mt-2">Add Admin</h4>

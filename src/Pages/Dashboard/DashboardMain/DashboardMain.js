@@ -1,22 +1,21 @@
-/* eslint-disable import/no-cycle */
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import Sidebar from '../../../components/Sidebar/Sidebar';
+import Sidebar from "../../../components/Sidebar/Sidebar";
 
 const DashboardMain = () => {
-  const [loggedUser, setLoggedUser] = useState('');
+  const [loggedUser, setLoggedUser] = useState("");
 
   useEffect(() => {
     async function LoggedUser() {
-      const url = 'https://goods4love.herokuapp.com/api/userinfo';
+      const url = "http://localhost:5000/api/userinfo";
       const req = await fetch(url, {
         headers: {
-          'x-access-token': localStorage.getItem('token'),
+          "x-access-token": localStorage.getItem("token"),
         },
       });
       const data = await req.json();
-      if (data.status === 'ok') {
+      if (data.status === "ok") {
         setLoggedUser(data.userInfo);
       } else {
         console.log(data.message);
@@ -40,13 +39,18 @@ const DashboardMain = () => {
             </div>
             <div className="m-5">
               <h5>Do you wnat to update your Profile?</h5>
-              <Link className="btn btn-lg btn-outline-primary mt-5 " to="/profile">
+              <Link
+                className="btn btn-lg btn-outline-primary mt-5 "
+                to="/profile"
+              >
                 Update Your Profile
               </Link>
             </div>
             <div className="tab-pane fade" id="allDonations">
               <h4 className="mt-2">allDonations</h4>
-              <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque.</p>
+              <p>
+                Vestibulum nec erat eu nulla rhoncus fringilla ut non neque.
+              </p>
             </div>
             <div className="tab-pane fade" id="addAdmin">
               <h4 className="mt-2">Add Admin</h4>

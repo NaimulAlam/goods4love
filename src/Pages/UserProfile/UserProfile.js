@@ -1,24 +1,23 @@
-/* eslint-disable import/no-cycle */
-import React, { useEffect, useState } from 'react';
-import Sidebar from '../../components/Sidebar/Sidebar';
+import React, { useEffect, useState } from "react";
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
   // const [tmpEmail, setTmpEmail] = useState('');
   // const [tmpfirstname, setTmpFirstName] = useState('');
-  const [tmpLastName, setTmpLastName] = useState('');
-  const [tmpOcupation, setTmpOcupation] = useState('');
+  const [tmpLastName, setTmpLastName] = useState("");
+  const [tmpOcupation, setTmpOcupation] = useState("");
 
   async function LoggedUser() {
-    const url = 'https://goods4love.herokuapp.com/api/userInfo';
+    const url = "http://localhost:5000/api/userInfo";
     const req = await fetch(url, {
       headers: {
-        'x-access-token': localStorage.getItem('token'),
+        "x-access-token": localStorage.getItem("token"),
       },
     });
     const data = await req.json();
-    console.log('dt', data);
-    if (data.status === 'ok') {
+    console.log("dt", data);
+    if (data.status === "ok") {
       setUser(data.userInfo);
       // setTmpEmail(data.user.email);
       // setTmpFirstName(data.user.firstName);
@@ -32,17 +31,16 @@ const UserProfile = () => {
 
   useEffect(() => {
     LoggedUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user.lastName, user.ocupation]);
 
   const updateUserInfo = async (e) => {
     e.preventDefault();
-    const url = 'https://goods4love.herokuapp.com/api/userInfoUpdate';
+    const url = "http://localhost:5000/api/userInfoUpdate";
     const req = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
         lastName: tmpLastName,
@@ -50,7 +48,7 @@ const UserProfile = () => {
       }),
     });
     const data = await req.json();
-    if (data.status === 'ok') {
+    if (data.status === "ok") {
       setUser(tmpLastName, tmpOcupation);
     } else {
       console.log(data.message);
@@ -67,29 +65,33 @@ const UserProfile = () => {
         <div className="col py-3" id="profile">
           <div className="card card-body mt-4">
             <h2 className="card-title">User Profile</h2>
-            <p>Your email: {user ? `${user.email}` : 'Email address not found'}</p>
+            <p>
+              Your email: {user ? `${user.email}` : "Email address not found"}
+            </p>
             <form onSubmit={updateUserInfo}>
               <div className="row">
                 <div className="col-md-6">
-                  <p>Your last name is: {user ? `${user?.lastName}` : 'No last name found'}</p>
+                  <p>
+                    Your last name is:{" "}
+                    {user ? `${user?.lastName}` : "No last name found"}
+                  </p>
                   <input
                     type="text"
                     placeholder="Update Last Name"
                     value={tmpLastName}
-                    onChange={(e) => {
-                      return setTmpLastName(e.target.value);
-                    }}
+                    onChange={(e) => setTmpLastName(e.target.value)}
                   />
                 </div>
                 <div className="col-md-6">
-                  <p>Your ocupation is: {user ? `${user?.ocupation}` : 'No ocupation found'}</p>
+                  <p>
+                    Your ocupation is:{" "}
+                    {user ? `${user?.ocupation}` : "No ocupation found"}
+                  </p>
                   <input
                     type="text"
                     placeholder="Update ocupation"
                     value={tmpOcupation}
-                    onChange={(e) => {
-                      return setTmpOcupation(e.target.value);
-                    }}
+                    onChange={(e) => setTmpOcupation(e.target.value)}
                   />
                 </div>
               </div>

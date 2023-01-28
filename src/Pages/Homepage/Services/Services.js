@@ -7,7 +7,7 @@ import saveChildren from '../../../Assests/saveChildren.png';
 
 const Offers = () => {
   return (
-    <div className="container py-md-5 py-3" id="Donate">
+    <div className="container py-md-5 py-3" id="donate">
       <div className="pricing-header p-3 pb-md-4 mx-auto text-center">
         <h1 className="display-4 fw-normal">Donate on a cause</h1>
         <p className="fs-5 text-muted">You can donate to any cause you like. these are just some of the ways</p>
@@ -37,7 +37,7 @@ const Offers = () => {
         <div className="col">
           <div className="card h-100 mb-4 rounded-3 shadow-sm border-danger">
             <div className="card-header text-white bg-danger py-3">
-              <h4 className="my-0 fw-normal">Become A Valunteer</h4>
+              <h4 className="my-0 fw-normal">Valunteer fund</h4>
             </div>
             <div>
               <img src={RWHeart} className="img-thumbnail ServiceImage" alt="..." />

@@ -23,21 +23,37 @@
 }
 
 .slider li {
-  width: 500px;
+  width: 400px;
   height: 320px;
   position: absolute;
   top: -325px;
   list-style: none;
+  padding: 10px;
 }
 
 .slider .quote {
-  font-size: 40px;
+  font-size: 35px;
   font-style: italic;
 }
 
 .slider .source {
   font-size: 20px;
   text-align: right;
+}
+
+@media only screen and (max-width: 768px) {
+  .slider li {
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    padding: 20px;
+  }
+  .slider .quote {
+    font-size: 25px;
+  }
+  .slider .source {
+    font-size: 15px;
+  }
 }
 
 .slider li.anim1 {

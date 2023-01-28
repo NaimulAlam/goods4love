@@ -1,23 +1,21 @@
-/* eslint-disable import/no-cycle */
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import React, { useEffect } from 'react';
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
-import AddAdmin from './Pages/Dashboard/AddAdmin/AddAdmin';
-import AddDonation from './Pages/Dashboard/AddDonation/AddDonation';
-import AllDonations from './Pages/Dashboard/AllDonations/AllDonations';
-import DashboardMain from './Pages/Dashboard/DashboardMain/DashboardMain';
-import Donate from './Pages/Dashboard/Donate/Donate';
-import Home from './Pages/Homepage/Home/Home';
-import Login from './Pages/Login/Login';
-import NotFound from './Pages/NotFound/NotFound';
-import RegistrationForm from './Pages/RegistrationForm/RegistrationForm';
-import DonationList from './Pages/Dashboard/UserDashboard/UserDonationList/UserDonationList';
-import UserDashboard from './Pages/Dashboard/UserDashboard/UserDashboard';
-import UserProfile from './Pages/UserProfile/UserProfile';
-import PrivateOutlet from './components/PrivateOutlet/PrivateOutlet';
-import AddReview from './Pages/Dashboard/AddReview/AddReview';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import React, { useEffect } from "react";
+import jwt_decode from "jwt-decode";
+import AddAdmin from "./Pages/Dashboard/AddAdmin/AddAdmin";
+import AddDonation from "./Pages/Dashboard/AddDonation/AddDonation";
+import AllDonations from "./Pages/Dashboard/AllDonations/AllDonations";
+import DashboardMain from "./Pages/Dashboard/DashboardMain/DashboardMain";
+import Donate from "./Pages/Dashboard/Donate/Donate";
+import Home from "./Pages/Homepage/Home/Home";
+import Login from "./Pages/Login/Login";
+import NotFound from "./Pages/NotFound/NotFound";
+import RegistrationForm from "./Pages/RegistrationForm/RegistrationForm";
+import DonationList from "./Pages/Dashboard/UserDashboard/UserDonationList/UserDonationList";
+import UserDashboard from "./Pages/Dashboard/UserDashboard/UserDashboard";
+import UserProfile from "./Pages/UserProfile/UserProfile";
+import PrivateOutlet from "./components/PrivateOutlet/PrivateOutlet";
+import AddReview from "./Pages/Dashboard/AddReview/AddReview";
 
 export const UserContext = React.createContext();
 export const UserInfoContext = React.createContext();
@@ -25,7 +23,7 @@ export const UserInfoContext = React.createContext();
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [userInfo, setUserInfo] = React.useState(null);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (!token) {
@@ -44,7 +42,7 @@ function App() {
         setUserInfo(user);
       }
     }
-  }, [token, isLoggedIn]);
+  }, [isLoggedIn]);
 
   return (
     <div className="App">

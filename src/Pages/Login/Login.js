@@ -1,13 +1,12 @@
-/* eslint-disable import/no-cycle */
-import React, { useContext, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import './Login.css';
-// eslint-disable-next-line import/no-cycle
-import { UserContext } from '../../App';
-import g4lLogo from '../../Assests/logo-g4l.png';
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import "./Login.css";
+
+import { UserContext } from "../../App";
+import g4lLogo from "../../Assests/logo-g4l.png";
 
 const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useContext(UserContext);
@@ -16,9 +15,9 @@ const Login = () => {
   const loginSchema = Yup.object().shape({
     email: Yup.string()
       .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)
-      .required('Email is required')
+      .required("Email is required")
       .lowercase(),
-    password: Yup.string().required('Password is required'),
+    password: Yup.string().required("Password is required"),
   });
 
   const formOptions = { resolver: yupResolver(loginSchema) };
@@ -34,21 +33,21 @@ const Login = () => {
   // login api call
   const onSubmit = async (submit) => {
     // console.log(submit);
-    const url = 'https://goods4love.herokuapp.com/api/login';
+    const url = "http://localhost:5000/api/login";
     const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      method: "POST",
+      headers: { "content-type": "application/json" },
       body: JSON.stringify(submit),
     });
     const data = await response.json();
     if (data.userToken) {
-      localStorage.setItem('token', data.userToken);
+      localStorage.setItem("token", data.userToken);
       setIsLoggedIn(true);
-      navigate('/dashboard');
+      navigate("/dashboard");
       window.location.reload();
     } else {
       // console.log('error');
-      alert('Sign In Failed! Check your email and password');
+      alert("Sign In Failed! Check your email and password");
     }
   };
   console.log(errors);
@@ -56,11 +55,11 @@ const Login = () => {
   useEffect(() => {
     if (isLoggedIn) {
       setIsLoggedIn(true);
-      navigate('/dashboard');
+      navigate("/dashboard");
       window.location.reload();
     } else {
       setIsLoggedIn(false);
-      navigate('/login');
+      navigate("/login");
     }
   }, [isLoggedIn, setIsLoggedIn, navigate]);
 
@@ -71,27 +70,32 @@ const Login = () => {
         <Link to="/" className="navbar-brand ms-lg-5">
           <img src={g4lLogo} alt="" />
         </Link>
-        <form onSubmit={handleSubmit(onSubmit)} className="loginForm row g-3 my-5 px-md-5">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="loginForm row g-3 my-5 px-md-5"
+        >
           <div className="text-center mt-5">
             <h2>Login</h2>
           </div>
           <div className="col-12 position-relative">
             <input
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              className={`form-control ${errors.email ? "is-invalid" : ""}`}
               type="text"
               name="email"
               placeholder="Email"
-              {...register('email')}
+              {...register("email")}
             />
-            <div className="invalid-feedback">please type correct email address</div>
+            <div className="invalid-feedback">
+              please type correct email address
+            </div>
           </div>
           <div className="col-12 position-relative">
             <input
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              className={`form-control ${errors.email ? "is-invalid" : ""}`}
               type="password"
               name="password"
               placeholder="Password"
-              {...register('password')}
+              {...register("password")}
             />
             <div className="invalid-feedback">please type correct password</div>
           </div>
@@ -106,14 +110,13 @@ const Login = () => {
             </button>
           </div>
           <div>
-            <h2>or</h2>
+            <p className="my-4">
+              Don't have an Account?{" "}
+              <Link to="/registration">create an account</Link>
+            </p>
           </div>
         </form>
-        <div className="container">
-          <p className="my-4">
-            Don't have an Account? <Link to="/registration">create an account</Link>
-          </p>
-        </div>
+        <div className="container"></div>
       </div>
     </div>
   );

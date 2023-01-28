@@ -1,16 +1,15 @@
-/* eslint-disable import/no-cycle */
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import userIcon from '../../Assests/RWHeart.png';
-import { UserInfoContext } from '../../App';
-import g4lLogo from '../../Assests/logo-g4l.png';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import userIcon from "../../Assests/RWHeart.png";
+import { UserInfoContext } from "../../App";
+import g4lLogo from "../../Assests/logo-g4l.png";
 
 const UserSidebar = () => {
   const [setUserInfo] = useContext(UserInfoContext);
   // console.log('nav', userInfo);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUserInfo(null);
   };
 
@@ -21,30 +20,38 @@ const UserSidebar = () => {
       </div>
       <img className="rounded mx-auto d-block" src={g4lLogo} alt="" />
 
-      <ul className="nav nav-tabs flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="sidebar">
+      <ul
+        className="nav nav-tabs flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+        id="sidebar"
+      >
         <li className="nav-item">
           <a href="/#Home" className="nav-link px-0 align-middle">
-            <i className="fs-4 bi-house" /> <span className="ms-1 d-none d-sm-inline">Home</span>
+            <i className="fs-4 bi-house" />{" "}
+            <span className="ms-1 d-none d-sm-inline">Home</span>
           </a>
         </li>
         <li className="nav-item">
           <Link to="/dashboard" className="nav-link px-0 align-middle">
-            <i className="fs-4 bi-speedometer2" /> <span className="ms-1 d-none d-sm-inline">Dashboard</span>
+            <i className="fs-4 bi-speedometer2" />{" "}
+            <span className="ms-1 d-none d-sm-inline">Dashboard</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link to="/donate" className="nav-link px-0 align-middle">
-            <i className="fs-4 bi-bag-plus" /> <span className="ms-1 d-none d-sm-inline">Donate</span>
+            <i className="fs-4 bi-bag-plus" />{" "}
+            <span className="ms-1 d-none d-sm-inline">Donate</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link to="/donation-list" className="nav-link px-0 align-middle">
-            <i className="fs-4 bi-card-list" /> <span className="ms-1 d-none d-sm-inline">Donation List</span>
+            <i className="fs-4 bi-card-list" />{" "}
+            <span className="ms-1 d-none d-sm-inline">Donation List</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link to="/add-review" className="nav-link px-0 align-middle">
-            <i className="fs-4 bi-pencil-square" /> <span className="ms-1 d-none d-sm-inline">Add Review</span>
+            <i className="fs-4 bi-pencil-square" />{" "}
+            <span className="ms-1 d-none d-sm-inline">Add Review</span>
           </Link>
         </li>
         <hr className="dropdown-divider" />
@@ -56,10 +63,19 @@ const UserSidebar = () => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img src={userIcon} alt="hugenerd" width="30" height="30" className="rounded-circle" />
+            <img
+              src={userIcon}
+              alt="hugenerd"
+              width="30"
+              height="30"
+              className="rounded-circle"
+            />
             <span className="d-none text-dark d-sm-inline mx-1">User</span>
           </Link>
-          <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser">
+          <ul
+            className="dropdown-menu text-small shadow"
+            aria-labelledby="dropdownUser"
+          >
             <li className="nav-item">
               <Link className="dropdown-item" to="/profile">
                 Profile
